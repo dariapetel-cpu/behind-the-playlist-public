@@ -1,0 +1,17 @@
+build/
+.venv/
+__pycache__/
+.DS_Store
+submission/
+backups/
+*.aux
+*.log
+*.bbl
+*.bcf
+*.blg
+*.fls
+*.fdb_latexmk
+*.run.xml
+*.toc
+*.out
+*.xdv

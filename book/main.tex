@@ -1,0 +1,75 @@
+% „מאחורי הפלייליסט" (Behind the Playlist): main file. Build: see README / Makefile.
+% Built with LuaLaTeX + Biber (class v1.0, Prompt 18). The XeLaTeX version (style.sty) produced submission v1.1.
+\documentclass{behind-the-playlist}
+\addbibresource{references.bib}
+\graphicspath{{figures/}}
+
+% PUBLIC EDITION (Prompt 26): student IDs and the submission date are removed.
+% Cover details: provided by the user (Prompt 12, 2026-11-14). The institution line was
+% removed at the user's request (no replacement invented). Student IDs appear ONLY here and
+% in the built PDF; README, screenshots and prompt logs mask them.
+\newcommand{\placeholder}[1]{\textcolor{brandpink}{[#1 – להשלמה]}}
+\newcommand{\bookcourse}{בינה מלאכותית יוצרת}
+\newcommand{\booklecturer}{ד״ר יורם סגל}
+
+\begin{document}
+
+% ------------------------------- cover -------------------------------
+\begin{titlepage}
+\thispagestyle{empty}
+% All cover text is placed absolutely (no vspace guessing). White Hebrew text uses
+% \hebcolor (never [heb] + colour, PRD §6).
+\begin{tikzpicture}[remember picture,overlay]
+  \coordinate (NE) at (current page.north east);
+  \coordinate (NW) at (current page.north west);
+  \fill[charcoal] (current page.north west) rectangle (current page.south east); % full charcoal cover (Prompt 13)
+  % waveform along the bottom of the band
+  \foreach \i in {0,...,70}{
+    \pgfmathsetmacro{\h}{0.15+1.25*abs(sin(23*\i)*cos(7*\i))}
+    \pgfmathsetmacro{\c}{mod(\i,9)==0 ? "brandpink" : "brandgreen"}
+    \fill[\c] ([xshift=1.2cm+\i*0.265cm,yshift=-11.2cm]NW) rectangle ++(0.15cm,\h cm);}
+  \node[anchor=north east,font=\headfont\bfseries\fontsize{40}{46}\selectfont]
+    at ([xshift=-2.5cm,yshift=-3.2cm]NE) {\hebcolor{pagebg}{מאחורי הפלייליסט}};
+  \node[anchor=north east,font=\headfont\Large]
+    at ([xshift=-2.5cm,yshift=-5.4cm]NE) {\hebcolor{brandgreen}{איך מערכות המלצה בוחרות לנו את השיר הבא}}; % green on charcoal 9.8:1
+  \node[anchor=north east,font=\headfont\large,text width=14cm,align=right] % same face as the subtitle (review-02 N4)
+    at ([xshift=-2.5cm,yshift=-13.4cm]NE)
+    {\hebcolor{pagebg}{בעקבות נועה, מאזינה בדיונית, אל מנגנוני ההמלצה של שירותי הזרמת המוזיקה}}; % commas: Arial Hebrew draws – like a raised maqaf
+\end{tikzpicture}\par % end the overlay's paragraph, or the vspace/tabular join it (LTR + top)
+\vspace*{\fill}
+\color{pagebg} % cover details: light text on charcoal
+\begin{tabular}{@{}H@{\quad}H@{}} % H = flush right in RTL tables (class v1.0). PUBLIC EDITION: no student IDs, no submission date
+  \headfont מחבר/ת: & דריה פטל\\
+  \headfont מחבר/ת: & רוני שגיא\\[4pt]
+  \headfont קורס: & \bookcourse\\
+  \headfont מרצה: & \booklecturer
+\end{tabular}\par
+\vspace*{1.5cm}
+\end{titlepage}
+\setcounter{page}{2} % titlepage resets to 1; the cover counts as page 1 (fixes duplicate PDF page anchors)
+
+% ------------------------------ abstract ------------------------------
+\chapter*{תקציר}
+\addcontentsline{toc}{chapter}{תקציר}
+\markboth{תקציר}{}
+\InputIfFileExists{chapters/00-abstract}{}{\placeholder{תקציר}}
+
+% -------------------------------- TOC ---------------------------------
+\cleardoublepage
+\tableofcontents
+\markboth{תוכן העניינים}{}
+
+% ------------------------------ chapters ------------------------------
+\InputIfFileExists{chapters/01-boker-tov}{}{}
+\InputIfFileExists{chapters/02-kol-dilug}{}{}
+\InputIfFileExists{chapters/03-anashim-kmotech}{}{}
+\InputIfFileExists{chapters/04-shirim-kmo-ze}{}{}
+\InputIfFileExists{chapters/05-hasha}{}{}
+\InputIfFileExists{chapters/06-shmone-tachanot}{}{}
+\InputIfFileExists{chapters/07-bua}{}{}
+\InputIfFileExists{chapters/08-play}{}{}
+
+% ---------------------------- bibliography ----------------------------
+\printbookbibliography
+
+\end{document}

@@ -1,0 +1,576 @@
+{
+ "pdf": "submission/behind-the-playlist.pdf",
+ "sha256": "43608a86aae3cc8e8877272d60de972f66e06fb4ca912cad92b2c78c8022a56c",
+ "findings": [
+  {
+   "id": "qa-typeset-01",
+   "check": "qa-typeset",
+   "status": "pass",
+   "where": "behind-the-playlist.pdf + main.log",
+   "evidence": "pages=20 errors=0 missing_chars=0 overfull=0 underfull=0 undef_refs=0 undef_cites=0",
+   "expected": "0 errors, 0 missing glyphs, no overfull >2pt, 0 undefined refs/cites, no text outside page, no white-on-light text",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-typeset-02",
+   "check": "qa-typeset",
+   "status": "pass",
+   "where": "whole PDF",
+   "evidence": "20 pages",
+   "expected": "20 pages",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-typeset-03",
+   "check": "qa-typeset",
+   "status": "pass",
+   "where": "TOC / chapter openings",
+   "evidence": "all 10 start pages match",
+   "expected": "chapter start pages as approved",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-typeset-04",
+   "check": "qa-typeset",
+   "status": "pass",
+   "where": "bibliography",
+   "evidence": "heading 'מקורות' on p.20; 18 entries; min x0=70.9",
+   "expected": "heading 'מקורות', 18 numbered entries, all inside the margins",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-typeset-05",
+   "check": "qa-typeset",
+   "status": "pass",
+   "where": "main.blg",
+   "evidence": "0 biber warnings/errors",
+   "expected": "0 biber warnings (all 18 sources resolve)",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-06",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [14]",
+   "evidence": "'איסוף אותות' read in RTL order from glyph positions",
+   "expected": "'איסוף אותות' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-07",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [14]",
+   "evidence": "'ניקוי ואיחוד נתונים' read in RTL order from glyph positions",
+   "expected": "'ניקוי ואיחוד נתונים' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-08",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [15]",
+   "evidence": "'ייצוג משתמשים ושירים' read in RTL order from glyph positions",
+   "expected": "'ייצוג משתמשים ושירים' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-09",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [14, 15, 18]",
+   "evidence": "'יצירת מועמדים' read in RTL order from glyph positions",
+   "expected": "'יצירת מועמדים' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-10",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [14, 15, 18]",
+   "evidence": "'דירוג' read in RTL order from glyph positions",
+   "expected": "'דירוג' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-11",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [15, 18]",
+   "evidence": "'סינון וגיוון' read in RTL order from glyph positions",
+   "expected": "'סינון וגיוון' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-12",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [15]",
+   "evidence": "'הצגת המלצות' read in RTL order from glyph positions",
+   "expected": "'הצגת המלצות' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-13",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [15]",
+   "evidence": "'משוב ולמידה' read in RTL order from glyph positions",
+   "expected": "'משוב ולמידה' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-14",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [15]",
+   "evidence": "'לולאת משוב' read in RTL order from glyph positions",
+   "expected": "'לולאת משוב' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-15",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [4, 7, 13]",
+   "evidence": "'שעה ביום' read in RTL order from glyph positions",
+   "expected": "'שעה ביום' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-16",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [6, 7, 10, 18]",
+   "evidence": "'אוטובוס' read in RTL order from glyph positions",
+   "expected": "'אוטובוס' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-17",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [7, 11]",
+   "evidence": "'חדר כושר' read in RTL order from glyph positions",
+   "expected": "'חדר כושר' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-18",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [5, 6, 7, 11]",
+   "evidence": "'לימודים' read in RTL order from glyph positions",
+   "expected": "'לימודים' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-19",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [2, 6, 7, 9]",
+   "evidence": "'נתונים בדיוניים' read in RTL order from glyph positions",
+   "expected": "'נתונים בדיוניים' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-20",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [6, 7, 12]",
+   "evidence": "'דילוגים' read in RTL order from glyph positions",
+   "expected": "'דילוגים' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-21",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [11]",
+   "evidence": "'שילוב גישות (כולל הקשר)' read in RTL order from glyph positions",
+   "expected": "'שילוב גישות (כולל הקשר)' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-22",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [11]",
+   "evidence": "'לא נבדק במקורות שלנו' read in RTL order from glyph positions",
+   "expected": "'לא נבדק במקורות שלנו' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-23",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [11]",
+   "evidence": "'עדיין קשה: אין היסטוריה' read in RTL order from glyph positions",
+   "expected": "'עדיין קשה: אין היסטוריה' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-24",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [11]",
+   "evidence": "'ממליץ רק על מה שדומה למה' read in RTL order from glyph positions",
+   "expected": "'ממליץ רק על מה שדומה למה' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-25",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [11]",
+   "evidence": "'אפשרי: מהשמע ומהמידע עליו' read in RTL order from glyph positions",
+   "expected": "'אפשרי: מהשמע ומהמידע עליו' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-26",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [11]",
+   "evidence": "'השיר שהומלץ ליוני (פרק 3)' read in RTL order from glyph positions",
+   "expected": "'השיר שהומלץ ליוני (פרק 3)' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-27",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [6]",
+   "evidence": "'(explicit feedback)' read in RTL order from glyph positions",
+   "expected": "'(explicit feedback)' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-28",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [6]",
+   "evidence": "'(implicit feedback)' read in RTL order from glyph positions",
+   "expected": "'(implicit feedback)' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-29",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [10]",
+   "evidence": "'(cold start problem)' read in RTL order from glyph positions",
+   "expected": "'(cold start problem)' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-30",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [7]",
+   "evidence": "'(יותר מ-30 שניות, לפי הגדרה שלנו לאיור זה)' read in RTL order from glyph positions",
+   "expected": "'(יותר מ-30 שניות, לפי הגדרה שלנו לאיור זה)' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-31",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [6]",
+   "evidence": "'28.8%' read in RTL order from glyph positions",
+   "expected": "'28.8%' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-32",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [14]",
+   "evidence": "'מ-2016' read in RTL order from glyph positions",
+   "expected": "'מ-2016' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-33",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [4, 18]",
+   "evidence": "'07:30' read in RTL order from glyph positions",
+   "expected": "'07:30' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-34",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [6]",
+   "evidence": "'התחילו 344 שירים' read in RTL order from glyph positions",
+   "expected": "'התחילו 344 שירים' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-35",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [1]",
+   "evidence": "'מחבר/ת: דריה פטל' read in RTL order from glyph positions",
+   "expected": "'מחבר/ת: דריה פטל' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-36",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [1]",
+   "evidence": "'מחבר/ת: רוני שגיא' read in RTL order from glyph positions",
+   "expected": "'מחבר/ת: רוני שגיא' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-37",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [1]",
+   "evidence": "'קורס: בינה מלאכותית יוצרת' read in RTL order from glyph positions",
+   "expected": "'קורס: בינה מלאכותית יוצרת' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-38",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [1]",
+   "evidence": "'מרצה: ד״ר יורם סגל' read in RTL order from glyph positions",
+   "expected": "'מרצה: ד״ר יורם סגל' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-39",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "pages [1]",
+   "evidence": "'תאריך הגשה: [תאריך ההגשה הושמט]' read in RTL order from glyph positions",
+   "expected": "'תאריך הגשה: [תאריך ההגשה הושמט]' readable right-to-left with Latin/digit runs intact",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-bidi-40",
+   "check": "qa-bidi",
+   "status": "pass",
+   "where": "all pages",
+   "evidence": "every multi-number citation ascending",
+   "expected": "citations like [4, 7] ascending",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-table-41",
+   "check": "qa-table",
+   "status": "pass",
+   "where": "p.11 Table 4.1",
+   "evidence": "'היבט' x=505, 'שילוב גישות' x=71",
+   "expected": "first column (היבט) on the right, last column on the left (RTL)",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-table-42",
+   "check": "qa-table",
+   "status": "pass",
+   "where": "p.11 Table 4.1",
+   "evidence": "4 dominant cell right edges (pt:count) [(317, 9), (524, 8), (447, 7), (188, 7)]",
+   "expected": "each column's cells share one right edge (flush right, ragged left)",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-table-43",
+   "check": "qa-table",
+   "status": "pass",
+   "where": "p.9 data table",
+   "evidence": "'מאזין/ה' x=468, 'שיר ג' x=358",
+   "expected": "first column on the right",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-img-44",
+   "check": "qa-img",
+   "status": "pass",
+   "where": "p.14 Fig. 6.1",
+   "evidence": "8 blocks, 8 with Hebrew label fully inside",
+   "expected": "8 blocks, every label inside its block",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-img-45",
+   "check": "qa-img",
+   "status": "pass",
+   "where": "Fig. 2.1 p.6",
+   "evidence": "caption + tag found",
+   "expected": "Fig. 2.1 captioned and tagged 'נתונים בדיוניים'",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-img-46",
+   "check": "qa-img",
+   "status": "pass",
+   "where": "Fig. 6.1 p.14",
+   "evidence": "caption + tag found",
+   "expected": "Fig. 6.1 captioned and tagged 'דוגמה לימודית'",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-img-47",
+   "check": "qa-img",
+   "status": "pass",
+   "where": "pp. 2-20 side margins",
+   "evidence": "no visible ink in the side margins",
+   "expected": "no figures, boxes or text in the side margins",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-code-48",
+   "check": "qa-code",
+   "status": "n/a",
+   "where": "whole book",
+   "evidence": "the book contains no code boxes (pythonbox/listings)",
+   "expected": "code boxes, if any, checked for background and overflow",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-footer-49",
+   "check": "qa-footer",
+   "status": "pass",
+   "where": "pp. 2-20 footers",
+   "evidence": "left = total (20), right = page number on every page",
+   "expected": "left number = total pages, right number = current page (LTR digits)",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-footer-50",
+   "check": "qa-footer",
+   "status": "pass",
+   "where": "p.19 footer (regression, Prompt 18)",
+   "evidence": "page 19 footer correct",
+   "expected": "p.19: '20' left, '19' right, bar not mirrored",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-footer-51",
+   "check": "qa-footer",
+   "status": "pass",
+   "where": "pp. 2-20 progress dot",
+   "evidence": "pink dot x per page: [451, 432, 412, 393, 373, 354, 334, 314, 295, 275, 256, 236, 217, 197, 177, 158, 138, 119, 99]",
+   "expected": "dot moves strictly right-to-left as pages advance",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-infra-52",
+   "check": "qa-infra",
+   "status": "pass",
+   "where": "project root",
+   "evidence": "all required files present",
+   "expected": "A2 §3.3 files present (main.tex, chapters, .cls, PRD, PLAN, TODO, README)",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-infra-53",
+   "check": "qa-infra",
+   "status": "pass",
+   "where": "book/chapters/",
+   "evidence": "no layout code in chapter files",
+   "expected": "layout lives in the class (A2 iron law)",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-infra-54",
+   "check": "qa-infra",
+   "status": "pass",
+   "where": "README.md",
+   "evidence": "40 relative links resolve",
+   "expected": "every README link resolves",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-infra-55",
+   "check": "qa-infra",
+   "status": "pass",
+   "where": "all text files",
+   "evidence": "student IDs only in book/main.tex (and PDFs)",
+   "expected": "no student IDs outside main.tex and the PDF",
+   "severity": "info",
+   "kind": "none"
+  },
+  {
+   "id": "qa-infra-56",
+   "check": "qa-infra",
+   "status": "fail",
+   "where": "submission/project-source.zip",
+   "evidence": "ZIP PDF matches submission PDF: False; ZIP contains .cls: False",
+   "expected": "the source package contains the approved PDF and the current sources",
+   "severity": "major",
+   "kind": "packaging"
+  },
+  {
+   "id": "qa-cls-version-57",
+   "check": "qa-cls-version",
+   "status": "pass",
+   "where": "behind-the-playlist.cls + build log",
+   "evidence": "\\ProvidesClass v1.0; CHANGELOG v1.0; log v1.0",
+   "expected": "class version identical in \\ProvidesClass, CHANGELOG and the build log",
+   "severity": "info",
+   "kind": "none"
+  }
+ ]
+}

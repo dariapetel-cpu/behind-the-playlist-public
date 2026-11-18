@@ -1,0 +1,190 @@
+% =====================================================================
+%  style.sty: design system for „מאחורי הפלייליסט" (Behind the Playlist)
+%  Owner: Boss. Writers use ONLY the commands documented in the
+%  "WRITER INTERFACE" block below; do not add packages in chapter files.
+%  Engine: XeLaTeX. bidi (loaded by polyglossia) must come LAST, so every
+%  package that bidi patches is loaded before it.
+% =====================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{style}[2026/11/14 Behind the Playlist design]
+
+% ---------- page ----------------------------------------------------
+\RequirePackage[a4paper,top=2.6cm,bottom=3.0cm,inner=2.5cm,outer=2.5cm,
+  headsep=0.8cm,footskip=1.3cm]{geometry}
+\RequirePackage{setspace}
+\setstretch{1.22}
+\setlength{\parskip}{0.45em}
+\setlength{\parindent}{0pt}
+\raggedbottom
+
+% ---------- packages bidi patches (must precede polyglossia/bidi) ----
+\RequirePackage{amsmath}
+\RequirePackage[table]{xcolor}
+\RequirePackage{graphicx}
+\RequirePackage{array,tabularx,booktabs}
+\RequirePackage{caption}
+\RequirePackage{enumitem}
+\RequirePackage{titlesec}
+\RequirePackage{fancyhdr}
+\RequirePackage{zref-totpages}
+\RequirePackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,shapes.misc}
+\RequirePackage[skins,breakable]{tcolorbox}
+\RequirePackage[style=english,autostyle=false]{csquotes} % no Hebrew style exists: avoid bold '?' markers
+\RequirePackage[hidelinks]{hyperref}
+
+% ---------- fonts & languages ----------------------------------------
+\RequirePackage{fontspec}
+\RequirePackage{polyglossia}
+\setmainlanguage{hebrew}
+\setotherlanguage{english}
+% biblatex must follow polyglossia (biblatex error otherwise)
+\RequirePackage[backend=biber,style=numeric,sorting=nyt,maxbibnames=7,
+  giveninits=true,url=true,doi=true,isbn=false,eprint=false,urldate=long,sortcites=true]{biblatex}
+% Latin + math text: New Peninim and Arial Hebrew have no Latin glyphs (PRD §6).
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+\newfontfamily\englishfont{Times New Roman}
+\newfontfamily\hebrewfont{New Peninim MT}[Script=Hebrew,Scale=1.12,
+  BoldFont={New Peninim MT Bold},
+  ItalicFont={New Peninim MT Inclined},
+  BoldItalicFont={New Peninim MT Bold Inclined}]
+\newfontfamily\hebrewfontsf{Arial Hebrew}[Script=Hebrew]
+\newfontfamily\headfont{Arial Hebrew}[Script=Hebrew]
+
+% ---------- palette (Prompt 13; also used in figures/noa_week.py) --------
+% Contrast (WCAG, measured): charcoal on pagebg 16.7:1, on green 9.8:1, on pink 5.4:1.
+% Green (1.7:1) and pink (3.1:1) on pagebg are NOT used for text: only fills, rules,
+% bars, dots and the footer progress line. All text on light pages is charcoal or muted.
+\definecolor{charcoal}{HTML}{121212}    % body text, headings, cover background
+\definecolor{brandgreen}{HTML}{1ED760}  % accents: fills, bars, progress, chart "plays"
+\definecolor{brandpink}{HTML}{FF2E88}   % accents: fills, dots, fact-check rule, chart "skips"
+\definecolor{pagebg}{HTML}{F2F2F2}      % light reading-page background
+\definecolor{muted}{HTML}{555555}       % small grey text (tags, running heads): 6.7:1 on pagebg
+\definecolor{rulegrey}{HTML}{CFCFCF}    % hairlines, empty progress track
+\colorlet{greensoft}{brandgreen!16!white}
+\colorlet{pinksoft}{brandpink!9!white}
+\pagecolor{pagebg}
+% Body text colour = charcoal, also as LaTeX's *default* colour, so that \normalcolor
+% resets (floats, table cells, boxes) return to charcoal instead of black.
+\AtBeginDocument{\color{charcoal}\let\default@color\current@color}
+
+% ---------- TikZ: Hebrew node text (PRD §6 TikZ RTL rule) -------------
+% Use [heb] on uncoloured nodes that contain Hebrew words; for coloured Hebrew text use \hebcolor{color}{text} (defined below).
+\tikzset{heb/.style={execute at begin node=\beginR, execute at end node=\endR}}
+
+% ---------- chapter openers: "רצועה 01" + equalizer -------------------
+\newcommand{\eqbars}[1]{% #1 = chapter number, seeds bar heights
+  \begin{tikzpicture}[baseline=0pt]
+    \foreach \i in {0,...,17}{
+      \pgfmathsetmacro{\h}{0.12+0.5*abs(sin(37*\i+53*#1))}
+      \pgfmathsetmacro{\c}{mod(\i,5)==2 ? "brandpink" : "brandgreen"}
+      \fill[\c] (\i*0.17,0) rectangle ++(0.09,\h);}
+  \end{tikzpicture}}
+\newcommand{\tracklabel}[1]{\textcolor{charcoal}{\headfont\small רצועה\enspace\ifnum#1<10 0\fi#1}}
+\titleformat{\chapter}[display]
+  {\headfont\color{charcoal}}
+  {\tracklabel{\thechapter}\hfill\eqbars{\thechapter}}
+  {6pt}
+  {\bfseries\fontsize{24}{30}\selectfont}
+  [\vspace{4pt}{\color{brandgreen}\titlerule[1.2pt]}] % decoration, not text
+\titleformat{name=\chapter,numberless}[display]
+  {\headfont\color{charcoal}}{}{0pt}
+  {\bfseries\fontsize{24}{30}\selectfont}
+  [\vspace{4pt}{\color{brandgreen}\titlerule[1.2pt]}] % decoration, not text
+\titlespacing*{\chapter}{0pt}{-18pt}{16pt}
+\titleformat{\section}{\headfont\bfseries\large\color{charcoal}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{12pt}{4pt}
+\setcounter{secnumdepth}{0}   % chapters numbered, sections not
+\setcounter{tocdepth}{0}      % TOC lists chapters only
+
+% ---------- header / footer: a "player" progress bar ------------------
+\newcommand{\playerbar}{%
+  \begin{tikzpicture}
+    \pgfmathsetmacro{\tot}{max(\ztotpages,1)}
+    \pgfmathsetmacro{\pf}{min(\thepage/\tot,1)}
+    \def\W{\textwidth-2.2cm}
+    \draw[rulegrey,line width=1.4pt,line cap=round] (1.1cm,0) -- (\textwidth-1.1cm,0);
+    \draw[brandgreen,line width=1.6pt,line cap=round]
+      (\textwidth-1.1cm,0) -- ($(\textwidth-1.1cm,0)-(\pf*\textwidth-\pf*2.2cm,0)$);
+    \fill[brandpink] ($(\textwidth-1.1cm,0)-(\pf*\textwidth-\pf*2.2cm,0)$) circle (2.8pt);
+    \node[font=\sffamily\scriptsize,text=charcoal,anchor=east] at (\textwidth,0) {\thepage};
+    \node[font=\sffamily\scriptsize,text=muted,anchor=west] at (0,0) {\ztotpages};
+  \end{tikzpicture}}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\headfont\footnotesize\color{muted}מאחורי הפלייליסט}
+\fancyhead[L]{\headfont\footnotesize\color{muted}\leftmark}
+\fancyfoot[C]{\playerbar}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\playerbar}\renewcommand{\headrulewidth}{0pt}}
+
+% ---------- captions ---------------------------------------------------
+\captionsetup{font={small,sf},labelfont={bf,color=charcoal},labelsep=colon,
+  justification=centering,skip=6pt}
+\DeclareCaptionFont{hsf}{\hebrewfontsf}
+\DeclareCaptionFont{charcoal}{\color{charcoal}}
+\captionsetup{font+={hsf,charcoal}}
+
+% ---------- lists --------------------------------------------------------
+\setlist{itemsep=2pt,topsep=4pt}
+\setlist[itemize]{label={\tikz[baseline=-0.55ex]\fill[brandpink] (0,0) circle (1.8pt);}} % New Peninim has no U+2022
+
+% ---------- boxes ---------------------------------------------------------
+% #3 (optional) = tag pill shown at the far (left) end of the title line.
+% A paragraph must never START with a TikZ box: bidi then sets it LTR (tag lands on the left).
+\newcommand{\boxtitle}[3][]{{\headfont\bfseries\color{#2}#3}\ifx\relax#1\relax\else\hfill#1\fi\par\smallskip}
+\tcbset{bookbase/.style={enhanced,breakable,boxrule=0pt,arc=1.6mm,coltext=charcoal,coltitle=charcoal,
+  left=4mm,right=5mm,top=3mm,bottom=3mm,before skip=10pt,after skip=10pt}}
+% NB (verified 2026-11-14 at glyph level): inside a [heb] node ANY colour change
+% (text=<color> or \color in the content) renders the text WHITE. For coloured Hebrew
+% node text, do not use [heb]; put the colour OUTSIDE the RTL segment, as in \hebcolor.
+\newcommand{\hebcolor}[2]{\textcolor{#1}{\beginR#2\endR}}
+\DeclareRobustCommand{\tagpill}[1]{\tikz[baseline=(t.base)]\node[draw=muted,dashed,rounded corners=2pt,
+  inner xsep=3.5pt,inner ysep=2.5pt,font=\headfont\footnotesize](t){\hebcolor{muted}{#1}};}
+
+% ===================== WRITER INTERFACE =====================
+% \begin{scene} ... \end{scene}            fictional scene with Noa (titled "סצנה", auto-tagged "בדיוני")
+% \begin{inshort} ... \end{inshort}         "בקצרה" takeaways box (green rule, light green fill)
+% \begin{lab}{<title>} ... \end{lab}        "מעבדה" formula / worked example (charcoal rule, white fill), auto-tagged "דוגמה לימודית"
+% \begin{realitycheck} ... \end{realitycheck}  "רגע, זה אמיתי?" research vs. myth / attributed platform claim (pink rule, light pink fill)
+% \fictional          inline tag "נתונים בדיוניים" (use mid-sentence or in captions; never as the first thing in a paragraph)
+% \educational        inline tag "דוגמה לימודית"
+% \term{מונח}{English term}   first use of a technical term: bold Hebrew + (English)
+% \en{English text}    English words inside Hebrew text
+% \enhead{English}     English words inside a \chapter/\section title
+% \cite[<postnote>]{key1,key2}  citation, printed as an LTR [n] unit
+% Figures/tables: standard figure/table environments with \caption and \label.
+% scene = fiction: white fill + dashed grey rule, so it never looks like the pink fact-check box (review-01 #35)
+\newtcolorbox{scene}{bookbase,colback=white,borderline east={2pt}{0pt}{muted,dashed},
+  before upper={\boxtitle[\tagpill{בדיוני}]{charcoal}{סצנה}}}
+\newtcolorbox{inshort}{bookbase,colback=greensoft,borderline east={3.5pt}{0pt}{brandgreen},
+  before upper={\boxtitle{charcoal}{בקצרה}}}
+\newtcolorbox{lab}[1]{bookbase,colback=white,borderline east={3.5pt}{0pt}{charcoal},
+  before upper={\boxtitle[\tagpill{דוגמה לימודית}]{charcoal}{מעבדה: #1}}}
+\newtcolorbox{realitycheck}{bookbase,colback=pinksoft,borderline east={3.5pt}{0pt}{brandpink},
+  before upper={\boxtitle{charcoal}{רגע, זה אמיתי?}}}
+\DeclareRobustCommand{\fictional}{\tagpill{נתונים בדיוניים}}
+\DeclareRobustCommand{\educational}{\tagpill{דוגמה לימודית}}
+\newcommand{\term}[2]{\textbf{\textcolor{charcoal}{#1}}~(\en{#2})} % gloss may break: \mbox caused overfull lines
+\newcommand{\en}[1]{\textenglish{#1}}
+\newcommand{\enhead}[1]{\textenglish{\sffamily #1}} % English inside headings (Arial Hebrew has no Latin)
+% Citations as a single LTR English-font unit (postnotes like "p.~3" need Latin glyphs) so "[3, 7]" never reorders inside RTL text.
+\AtBeginDocument{%
+  \let\bookorigcite\cite
+  \RenewDocumentCommand{\cite}{o m}{\textenglish{\IfValueTF{#1}{\bookorigcite[#1]{#2}}{\bookorigcite{#2}}}}}
+% Long URLs in the bibliography: allow breaks after digits/letters (avoid overfull lines)
+% (review-01 #34, review-02 N1) bibliography set ragged-right with no stretch inside URLs:
+% URLs break only at / . - and never get stretched letter gaps.
+\setcounter{biburlnumpenalty}{0}
+\setcounter{biburlucpenalty}{0}
+\setcounter{biburllcpenalty}{0}
+\AtBeginBibliography{\raggedright}
+% Entries with a DOI print the DOI only; their extra URL + access date were redundant
+% (most were doi.org links). Web-only sources keep URL and "visited on" date. The .bib keeps all fields.
+\DeclareSourcemap{\maps[datatype=bibtex]{\map{
+  \step[fieldsource=doi,final]
+  \step[fieldset=url,null]
+  \step[fieldset=urldate,null]}}}
+\endinput

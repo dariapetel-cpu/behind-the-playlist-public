@@ -1,0 +1,52 @@
+% Toolchain smoke test: Hebrew RTL + heading + formula + TikZ (XeLaTeX)
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{tikz}            % load TikZ before bidi (via polyglossia)
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{tcolorbox}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{hebrew}
+\setotherlanguage{english}
+% Arial Hebrew has no Latin glyphs; math and Latin text take \setmainfont,
+% so the main font must cover Latin. Hebrew runs use \hebrewfont.
+\setmainfont{Times New Roman}
+\newfontfamily\hebrewfont{Arial Hebrew}[Script=Hebrew]
+\newfontfamily\englishfont{Times New Roman}
+\definecolor{brand}{HTML}{1F6F78}
+
+\begin{document}
+
+\section{בדיקת עברית: מאחורי הפלייליסט}
+
+נועה פותחת את האפליקציה בשבע וחצי בבוקר. המערכת מציעה לה 30 שירים חדשים,
+ואחד מהם הוא בדיוק מה שרצתה. איך זה קרה? בספר נבדוק מערכות כמו
+\textenglish{Spotify} ו־\textenglish{YouTube Music}, בלי לטעון שאנחנו מכירים את האלגוריתם האמיתי שלהן.
+מספרים: 1,234 השמעות, 87\% דילוגים, ותאריך 11/11/2026.
+
+\begin{tcolorbox}[colback=brand!8,colframe=brand,title=בקצרה]
+דמיון קוסינוס (נוסחה לימודית, לא האלגוריתם של חברה כלשהי):
+\[
+\cos(\theta)=\frac{\mathbf{a}\cdot\mathbf{b}}{\lVert\mathbf{a}\rVert\,\lVert\mathbf{b}\rVert}
+=\frac{1\cdot 2+3\cdot 1}{\sqrt{10}\,\sqrt{5}}\approx 0.71
+\]
+\end{tcolorbox}
+
+\begin{center}
+\begin{tikzpicture}[node distance=1.2cm,
+  % TikZ typesets node text in an LTR \hbox, where \setRTL has no effect.
+  % Wrap node text in XeTeX's TeX--XeT primitives so each label is an RTL segment.
+  every node/.append style={execute at begin node=\beginR, execute at end node=\endR},
+  box/.style={draw=brand,fill=brand!10,rounded corners,minimum width=2.6cm,minimum height=0.9cm,font=\small},
+  arr/.style={-{Stealth[length=2.5mm]},thick,draw=brand}]
+  \node[box] (a) {איסוף אותות};
+  \node[box,left=of a] (b) {דירוג מועמדים};
+  \node[box,left=of b] (c) {הצגת המלצות};
+  \draw[arr] (a) -- (b);
+  \draw[arr] (b) -- (c);
+\end{tikzpicture}
+\end{center}
+
+\end{document}

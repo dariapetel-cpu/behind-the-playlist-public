@@ -1,0 +1,92 @@
+{
+  "edition": "public",
+  "_comment": "Expected results for the approved book (2026-11-18). Used by the qa-* Skills. Edit only with the user's approval.",
+  "pages": 20,
+  "chapter_starts": {
+    "תקציר": 2,
+    "בוקר טוב, נועה": 4,
+    "כל דילוג נספר": 6,
+    "אנשים כמוך": 8,
+    "שירים כמו זה": 10,
+    "הפלייליסט יודע מה השעה?": 12,
+    "שמונה תחנות בדרך לשיר הבא": 14,
+    "בועה עם פסקול": 16,
+    "נועה לוחצת Play": 18,
+    "מקורות": 19
+  },
+  "bib_entries": 18,
+  "text_block_x": [
+    70.9,
+    524.4
+  ],
+  "phrases": {
+    "diagram": [
+      "איסוף אותות",
+      "ניקוי ואיחוד נתונים",
+      "ייצוג משתמשים ושירים",
+      "יצירת מועמדים",
+      "דירוג",
+      "סינון וגיוון",
+      "הצגת המלצות",
+      "משוב ולמידה",
+      "לולאת משוב"
+    ],
+    "graph": [
+      "שעה ביום",
+      "אוטובוס",
+      "חדר כושר",
+      "לימודים",
+      "נתונים בדיוניים",
+      "דילוגים"
+    ],
+    "table": [
+      "שילוב גישות (כולל הקשר)",
+      "לא נבדק במקורות שלנו",
+      "עדיין קשה: אין היסטוריה",
+      "ממליץ רק על מה שדומה למה",
+      "אפשרי: מהשמע ומהמידע עליו",
+      "השיר שהומלץ ליוני (פרק 3)"
+    ],
+    "mixed": [
+      "(explicit feedback)",
+      "(implicit feedback)",
+      "(cold start problem)",
+      "(יותר מ-30 שניות, לפי הגדרה שלנו לאיור זה)",
+      "28.8%",
+      "מ-2016",
+      "07:30",
+      "התחילו 344 שירים"
+    ],
+    "cover": [
+      "מחבר/ת: דריה פטל",
+      "מחבר/ת: רוני שגיא",
+      "קורס: בינה מלאכותית יוצרת",
+      "מרצה: ד״ר יורם סגל",
+      "תאריך הגשה: [תאריך ההגשה הושמט]"
+    ]
+  },
+  "cover_public": {
+    "_note": "Public (GitHub) edition, Prompt 27: no student IDs and no submission-date row on the cover. Used with qa_lib.py --edition public.",
+    "phrases": [
+      "מחבר/ת: דריה פטל",
+      "מחבר/ת: רוני שגיא",
+      "קורס: בינה מלאכותית יוצרת",
+      "מרצה: ד״ר יורם סגל"
+    ],
+    "forbidden_labels": ["תאריך הגשה", "ת״ז"],
+    "forbidden_patterns": ["\\d{9}", "\\d{1,2}[./]\\d{1,2}[./]\\d{2,4}"]
+  },
+  "required_files": [
+    "book/main.tex",
+    "book/behind-the-playlist.cls",
+    "PRD.md",
+    "PLAN.md",
+    "TODO.md",
+    "README.md",
+    "book/references.bib",
+    "book/chapters/01-boker-tov.tex",
+    "book/fonts/SOURCES.md"
+  ],
+  "diagram_blocks": 8,
+  "_calibration": "2026-11-18 (Prompt 22), before the first Detector run: '(344 שירים)' was a smoke-test phrase, not in the book -> replaced by Fig. 2.1's caption phrase; the wrapped Table 4.1 cell is checked by its first line only (the harness reads table rows across columns)."
+}

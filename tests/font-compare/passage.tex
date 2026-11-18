@@ -1,0 +1,22 @@
+% Shared passage: Chapter 2 opening + numbers sentence, taken verbatim from book/chapters/02-kol-dilug.tex
+% (\term/\en/\fictional macros simplified to plain markup). Fictional data as in the book.
+{\sffamily\small\color{charcoal}רצועה 02\par}
+\section*{\sffamily כל דילוג נספר}
+{\color{brandgreen}\rule{\linewidth}{1.2pt}}\par\medskip
+כשמישהו נותן לסרט ארבעה כוכבים, הוא אומר לנו במפורש מה הוא חושב. זה \textbf{משוב מפורש} (explicit feedback). אבל ברוב הזמן אנחנו לא נותנים ציון לשום דבר, אנחנו פשוט מקשיבים. לכן מערכות יכולות ללמוד גם מ\textbf{משוב משתמע} (implicit feedback): הן עוקבות באופן פסיבי אחרי ההתנהגות שלנו, כמו היסטוריית רכישות, הרגלי צפייה או גלישה. בניגוד לציון מפורש, אין כאן אמירה ישירה של המשתמש על מה שהוא אוהב או לא אוהב \cite{hu2008collaborative}.
+
+לצורך האיור קבענו הגדרה משלנו: שיר „הושמע" אם נועה שמעה ממנו יותר מ-30 שניות (הגדרה בדיונית). במהלך השבוע התחילו 344 שירים. 245 מהם הושמעו ועל 99 נועה דילגה, כלומר 28.8\%. לפי שוורץ, יותר מדי בחירה עלולה דווקא להכביד \cite{schwartz2004paradox}.
+
+\begin{center}
+\begin{tikzpicture}[node distance=1.2cm,
+  box/.style={draw=charcoal,line width=0.8pt,rounded corners=2mm,minimum width=3.1cm,minimum height=0.95cm,font=\sffamily}]
+  \node[box,fill=brandgreen!28!white] (a) {איסוף אותות};
+  \node[box,fill=brandpink!25!white,left=of a] (b) {דירוג מועמדים};
+  \draw[-{Stealth[length=2.4mm]},line width=0.9pt,draw=charcoal] (a) -- (b);
+\end{tikzpicture}
+\end{center}
+
+{\sffamily\bfseries\color{charcoal}מקורות\par}
+\begin{otherlanguage}{english}
+\printbibliography[heading=none]
+\end{otherlanguage}

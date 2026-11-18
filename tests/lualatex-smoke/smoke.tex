@@ -1,0 +1,51 @@
+% LuaLaTeX + Biber smoke test (Prompt 15, 2026-11-18). Isolated: does not touch book/ or submission/.
+% Engine: LuaLaTeX (TeX Live 2026). Bidi: babel bidi=basic + layout=graphics (TikZ node text placed
+% and mirrored correctly; without it, off-origin node labels land outside their boxes) + onchar=ids fonts
+% (Latin runs switch font and direction; without it, Latin glyphs go missing and brackets don't mirror).
+% Fonts: macOS system fonts, only to test the engine; the open-licence font choice (F-2) is separate.
+% New Peninim MT is NOT used: under LuaLaTeX any \section with it swallowed the following text
+% (found 2026-11-18, see the incident note in docs/prompts.md, Prompt 15).
+% Bibliography: biblatex style=ieee from the existing book/references.bib.
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[bidi=basic,layout=graphics]{babel}
+\babelprovide[main,import,onchar=ids fonts]{hebrew}
+\babelprovide[import,onchar=ids fonts]{english}
+\babelfont{rm}{Times New Roman}                  % Latin text and math
+\babelfont[hebrew]{rm}{Arial Hebrew}
+\babelfont[hebrew]{sf}{Arial Hebrew}
+\setmathrm{Times New Roman}  % math operators (cos) need Latin glyphs; Hebrew rm has none
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage[backend=biber,style=ieee]{biblatex}  % IEEE (biblatex-ieee v1.4g, installed 2026-11-18)
+\addbibresource{../../book/references.bib}
+\definecolor{charcoal}{HTML}{121212}
+\definecolor{brandgreen}{HTML}{1ED760}
+\definecolor{brandpink}{HTML}{FF2E88}
+\pagestyle{empty}
+\begin{document}
+\section*{בדיקת LuaLaTeX}
+
+נועה פתחה את Spotify בבוקר וקיבלה רשימה של (344 שירים), כולל שיר של Radiohead שלא הכירה.
+לפי המחקר, משוב משתמע מבטא העדפה בדרגות ביטחון שונות \cite{hu2008collaborative}.
+
+\[
+\cos(\theta)=\frac{\mathbf{a}\cdot\mathbf{b}}{\lVert\mathbf{a}\rVert\,\lVert\mathbf{b}\rVert}
+=\frac{26}{\sqrt{30}\cdot 5}\approx 0.95
+\]
+
+\begin{center}
+\begin{tikzpicture}[node distance=1.4cm,
+  box/.style={draw=charcoal,fill=brandgreen!28!white,rounded corners,minimum width=3cm,minimum height=1cm,font=\sffamily}]
+  \node[box] (a) {איסוף אותות};
+  \node[box,left=of a,fill=brandpink!25!white] (b) {דירוג מועמדים};
+  \draw[-{Stealth[length=2.5mm]},thick,draw=charcoal] (a) -- (b);
+\end{tikzpicture}
+\end{center}
+
+\begin{otherlanguage}{english}
+\printbibliography
+\end{otherlanguage}
+\end{document}

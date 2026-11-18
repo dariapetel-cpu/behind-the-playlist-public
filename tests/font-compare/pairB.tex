@@ -1,0 +1,32 @@
+\documentclass[11pt]{article}
+\usepackage[paperwidth=13.6cm,paperheight=18cm,top=0.7cm,bottom=0.4cm,left=0.5cm,right=0.5cm]{geometry}
+\usepackage{xcolor}
+\definecolor{charcoal}{HTML}{121212}\definecolor{brandgreen}{HTML}{1ED760}
+\definecolor{brandpink}{HTML}{FF2E88}\definecolor{pagebg}{HTML}{F2F2F2}
+\usepackage{tikz}\usetikzlibrary{arrows.meta,positioning}
+\usepackage[bidi=basic,layout=graphics.lists]{babel}  % lists: fixes LTR list (bibliography) indent in RTL doc
+\babelprovide[main,import,onchar=ids fonts]{hebrew}
+\babelprovide[import,onchar=ids fonts]{english}
+% Pairing B: Noto Serif Hebrew (body) + Noto Sans Hebrew (headings) + Noto Serif / Noto Sans (Latin, italic)
+% Noto *Hebrew* fonts contain no digits, Latin or basic punctuation: those come from a luaotfload fallback.
+% Fallback fonts must be given as "[absolute path]"; "file:" and "kpse:" forms failed to load (tested 2026-11-18).
+\directlua{
+  luaotfload.add_fallback("fbSerifR",{"["..lfs.currentdir().."/fonts/NotoSerif/NotoSerif-Regular.ttf]"})
+  luaotfload.add_fallback("fbSerifB",{"["..lfs.currentdir().."/fonts/NotoSerif/NotoSerif-Bold.ttf]"})
+  luaotfload.add_fallback("fbSansR",{"["..lfs.currentdir().."/fonts/NotoSans/NotoSans-Regular.ttf]"})
+  luaotfload.add_fallback("fbSansB",{"["..lfs.currentdir().."/fonts/NotoSans/NotoSans-Bold.ttf]"})}
+\babelfont{rm}[Path=fonts/NotoSerif/,Extension=.ttf,UprightFont=*-Regular,ItalicFont=*-Italic,BoldFont=*-Bold,BoldItalicFont=*-BoldItalic,Scale=0.84]{NotoSerif}
+\babelfont[hebrew]{rm}[Path=fonts/NotoSerifHebrew/,Extension=.ttf,UprightFont=*-Regular,BoldFont=*-Bold,Scale=0.87,
+  UprightFeatures={RawFeature={fallback=fbSerifR}},BoldFeatures={RawFeature={fallback=fbSerifB}}]{NotoSerifHebrew}
+\babelfont{sf}[Path=fonts/NotoSans/,Extension=.ttf,UprightFont=*-Regular,BoldFont=*-Bold,Scale=0.84]{NotoSans}
+\babelfont[hebrew]{sf}[Path=fonts/NotoSansHebrew/,Extension=.ttf,UprightFont=*-Regular,BoldFont=*-Bold,Scale=0.94,
+  UprightFeatures={RawFeature={fallback=fbSansR}},BoldFeatures={RawFeature={fallback=fbSansB}}]{NotoSansHebrew}
+\setmathrm{NotoSerif}[Path=fonts/NotoSerif/,Extension=.ttf,UprightFont=*-Regular,ItalicFont=*-Italic,BoldFont=*-Bold]
+\usepackage[backend=biber,style=ieee]{biblatex}
+\addbibresource{../../book/references.bib}
+\pagecolor{pagebg}\pagestyle{empty}\setlength{\parskip}{0.4em}\setlength{\parindent}{0pt}
+\linespread{1.22}
+\makeatletter\AtBeginDocument{\color{charcoal}\let\default@color\current@color}\makeatother
+\begin{document}
+\input{passage.tex}
+\end{document}

@@ -1,0 +1,25 @@
+% Font pairing comparison (Prompt 17, 2026-11-18). Both columns are the real one-column builds
+% (pairA.pdf, pairB.pdf) placed at 100% scale: same 11 pt body size and line spacing for both.
+\documentclass{article}
+\usepackage[a4paper,landscape,margin=0.55cm]{geometry}
+\usepackage{graphicx,xcolor}
+\usepackage{fontspec}
+\setmainfont{Heebo}[Path=fonts/Heebo/,Extension=.ttf,UprightFont=*-Regular,BoldFont=*-Bold]
+\definecolor{charcoal}{HTML}{121212}\definecolor{brandgreen}{HTML}{1ED760}
+\definecolor{brandpink}{HTML}{FF2E88}\definecolor{pagebg}{HTML}{F2F2F2}
+\pagecolor{pagebg}\pagestyle{empty}\color{charcoal}
+\setlength{\parindent}{0pt}
+\begin{document}
+\begin{minipage}[t]{13.6cm}
+{\bfseries B \quad Noto Serif Hebrew + Noto Sans Hebrew}\\
+{\footnotesize Latin: Noto Serif / Noto Sans. Digits \& punctuation come from a fallback font (the Hebrew Noto fonts have none). OFL 1.1.}\\[-2pt]
+{\color{brandpink}\rule{13.6cm}{1.5pt}}\\[2pt]
+\includegraphics[scale=1]{pairB.pdf}
+\end{minipage}\hfill
+\begin{minipage}[t]{13.6cm}
+{\bfseries A \quad Frank Ruhl Libre + Heebo}\\
+{\footnotesize Latin: Libertinus Serif (with true italic). All glyphs in the fonts themselves. OFL 1.1.}\\[-2pt]
+{\color{brandgreen}\rule{13.6cm}{1.5pt}}\\[2pt]
+\includegraphics[scale=1]{pairA.pdf}
+\end{minipage}
+\end{document}

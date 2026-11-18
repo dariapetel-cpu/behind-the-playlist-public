@@ -1,0 +1,23 @@
+\documentclass[11pt]{article}
+\usepackage[paperwidth=13.6cm,paperheight=18cm,top=0.7cm,bottom=0.4cm,left=0.5cm,right=0.5cm]{geometry}
+\usepackage{xcolor}
+\definecolor{charcoal}{HTML}{121212}\definecolor{brandgreen}{HTML}{1ED760}
+\definecolor{brandpink}{HTML}{FF2E88}\definecolor{pagebg}{HTML}{F2F2F2}
+\usepackage{tikz}\usetikzlibrary{arrows.meta,positioning}
+\usepackage[bidi=basic,layout=graphics.lists]{babel}  % lists: fixes LTR list (bibliography) indent in RTL doc
+\babelprovide[main,import,onchar=ids fonts]{hebrew}
+\babelprovide[import,onchar=ids fonts]{english}
+% Pairing A: Frank Ruhl Libre (Hebrew serif body) + Heebo (sans headings) + Libertinus Serif (Latin, with italic)
+\babelfont{rm}[Path=fonts/LibertinusSerif/,Extension=.otf,UprightFont=*-Regular,ItalicFont=*-Italic,BoldFont=*-Bold,BoldItalicFont=*-BoldItalic,Scale=1.03]{LibertinusSerif}
+\babelfont[hebrew]{rm}[Path=fonts/FrankRuhlLibre/,Extension=.ttf,UprightFont=*-Regular,BoldFont=*-Bold,Scale=0.96]{FrankRuhlLibre}
+\babelfont{sf}[Path=fonts/Heebo/,Extension=.ttf,UprightFont=*-Regular,BoldFont=*-Bold,Scale=0.97]{Heebo}
+\babelfont[hebrew]{sf}[Path=fonts/Heebo/,Extension=.ttf,UprightFont=*-Regular,BoldFont=*-Bold,Scale=0.97]{Heebo}
+\setmathrm{LibertinusSerif}[Path=fonts/LibertinusSerif/,Extension=.otf,UprightFont=*-Regular,ItalicFont=*-Italic,BoldFont=*-Bold]
+\usepackage[backend=biber,style=ieee]{biblatex}
+\addbibresource{../../book/references.bib}
+\pagecolor{pagebg}\pagestyle{empty}\setlength{\parskip}{0.4em}\setlength{\parindent}{0pt}
+\linespread{1.22}
+\makeatletter\AtBeginDocument{\color{charcoal}\let\default@color\current@color}\makeatother
+\begin{document}
+\input{passage.tex}
+\end{document}
