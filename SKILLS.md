@@ -4,6 +4,9 @@ The Skills used in this project (A2 §5: "list of the Skills used in the project
 
 | Skill | Purpose | Files | Actually run |
 |---|---|---|---|
+| `researcher` | Check claims against sources | `.claude/skills/researcher/SKILL.md` | Supplemental role prompt in `prompts/supplemental-role-check.md` |
+| `writer` | Draft Hebrew chapters using research notes | `.claude/skills/writer/SKILL.md` | Supplemental role prompt in `prompts/supplemental-role-check.md` |
+| `reviewer` | Review evidence and chapter text | `.claude/skills/reviewer/SKILL.md` | Supplemental role prompt in `prompts/supplemental-role-check.md` |
 | `detector` | Detector role: run qa-super + visual red-team review; report only, never edit | `.claude/skills/detector/SKILL.md` | D1, D2 (2026-11-18) |
 | `fixer` | Fixer role: fix only in the class or Skills; flag content and packaging; build a candidate PDF | `.claude/skills/fixer/SKILL.md` | F1 (2026-11-18) |
 | `qa-super` | Orchestrator: all qa-* families in one pass | `.claude/skills/qa-super/SKILL.md`, `tools/qa/qa_lib.py` | D1, D2 |

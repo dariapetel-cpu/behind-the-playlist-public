@@ -24,10 +24,14 @@ OUT = ROOT / "book" / "figures" / "noa_week.pdf"
 # bar fills (non-text graphics); all text is charcoal or muted grey (>= 6.7:1 on the page colour).
 GREEN, PINK, CHARCOAL, MUTED, GRID, PAGE = "#1ED760", "#FF2E88", "#121212", "#555555", "#D4D4D4", "#F2F2F2"
 
-for f in ("/System/Library/Fonts/Supplemental/Arial.ttf",
-          "/System/Library/Fonts/Supplemental/Arial Bold.ttf"):
-    font_manager.fontManager.addfont(f)
-plt.rcParams.update({"font.family": "Arial", "font.size": 9, "pdf.fonttype": 42,
+mac_fonts = Path("/System/Library/Fonts/Supplemental")
+fonts = [mac_fonts / "Arial.ttf", mac_fonts / "Arial Bold.ttf"]
+if not all(font.is_file() for font in fonts):
+    fonts = [ROOT / "book/fonts/Heebo" / name for name in ("Heebo-Regular.ttf", "Heebo-Bold.ttf")]
+for font in fonts:
+    font_manager.fontManager.addfont(str(font))
+family = font_manager.FontProperties(fname=str(fonts[0])).get_name()
+plt.rcParams.update({"font.family": family, "font.size": 9, "pdf.fonttype": 42,
                      "axes.edgecolor": MUTED, "xtick.color": CHARCOAL, "ytick.color": CHARCOAL,
                      "figure.facecolor": PAGE, "axes.facecolor": PAGE, "savefig.facecolor": PAGE,
                      "hatch.color": CHARCOAL, "hatch.linewidth": 0.6, "text.color": CHARCOAL})

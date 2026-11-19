@@ -71,7 +71,7 @@
 - [x] Log every iteration (who detected, who fixed, what changed, recheck result) in `docs/agents/log.md` and `docs/qa/` (B) — done: `docs/agents/log.md` rows 6–8, `docs/qa/round-01/README.md` (2026-11-18, QA round 1)
 
 ## QA follow-ups (from QA round 1)
-- [ ] **D3-01 (open):** fix `qa-bidi` in `tools/qa/qa_lib.py` so the „לולאת משוב" check reads the rotated label on the diagram page (p.14) instead of matching p.15 body text; add a negative test. Until then the label is covered by the manual check that passed in D3 and was approved by the user (Prompt 25) (F/B)
+- [x] D3-01: The automated check locates the rotated label on page 14. Regression tests verify that deleting the label fails even when the same words remain on page 15.
 - [x] D1-04 label gap: the users decided on a ≈2 mm gap; done and approved (Prompt 25)
 - [x] Promote the QA candidate (class v1.1 + label offset) to `submission/`: approved and done (Prompt 25)
 

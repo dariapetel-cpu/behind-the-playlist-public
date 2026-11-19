@@ -100,11 +100,51 @@ def check_public_cover(doc):
         else "no ID or submission-date label and no 9-digit number or date on the cover",
         "public cover without student IDs and without the submission date", "blocker", "content")
 
+def check_feedback_label(doc, phrase):
+    # Match Figure 6.1 independently of its label. Body text on the next page
+    # repeats the phrase and must never satisfy this check (D3-01).
+    matched_pages = []
+    diagram_pages = []
+    for page in doc:
+        text = page.get_text()
+        if "6.1" not in text or "דוגמה לימודית" not in text:
+            continue
+        blocks = diagram_blocks(page)
+        if len(blocks) != EXP["diagram_blocks"]:
+            continue
+        diagram_pages.append(page.number + 1)
+        top = min(r.y0 for r in blocks)
+        bottom = max(r.y1 for r in blocks)
+        right = max(r.x1 for r in blocks)
+        for line, chars in page_lines(page):
+            dx, dy = line["dir"]
+            x0, y0, _, y1 = line["bbox"]
+            if dy > -0.99 or x0 < right or y0 < top or y1 > bottom:
+                continue
+            # Read Hebrew against the line direction, using the glyph origins
+            # projected onto the rotated baseline. Spaces in TeX may be synthetic.
+            ordered = sorted(chars, key=lambda c: dx*c["origin"][0] + dy*c["origin"][1], reverse=True)
+            if norm("".join(c["c"] for c in ordered)) == norm(phrase):
+                matched_pages.append(page.number + 1)
+    ok = len(diagram_pages) == 1 and matched_pages == diagram_pages
+    add("qa-bidi", "pass" if ok else "fail", f"Fig. 6.1 on pages {diagram_pages}",
+        f"Rotated '{phrase}' in RTL glyph order beside the blocks: {matched_pages}",
+        "one occurrence of the rotated feedback label beside the eight diagram blocks", "major", "template")
+
+
+def diagram_blocks(page):
+    return [d["rect"] for d in page.get_drawings()
+            if 80 < d["rect"].width < 100 and 35 < d["rect"].height < 50]
+
+
 def check_bidi(doc):
     full = {i+1: norm(page_text_rtl(p)) for i, p in enumerate(doc)}
     for group in ("diagram", "graph", "table", "mixed", "cover"):
         phrases = EXP["cover_public"]["phrases"] if (group == "cover" and EDITION == "public") else EXP["phrases"][group]
         for ph in phrases:
+            if group == "diagram" and ph == "לולאת משוב":
+                check_feedback_label(doc, ph)
+                continue
             hit = [pg for pg, t in full.items() if norm(ph) in t]
             add("qa-bidi", "pass" if hit else "fail", f"pages {hit}" if hit else "whole PDF",
                 f"'{ph}' read in RTL order from glyph positions" + ("" if hit else ": NOT found in reading order"),
@@ -162,7 +202,7 @@ def check_table(doc):
 def check_img(doc):
     pg = next((p for p in doc if "לולאת" in p.get_text() and "ולמידה" in p.get_text()), None)
     if pg:
-        rects = [x["rect"] for x in pg.get_drawings() if 80 < x["rect"].width < 100 and 35 < x["rect"].height < 50]
+        rects = diagram_blocks(pg)
         cs = [c for _, cc in page_lines(pg) for c in cc]
         inside = sum(1 for R in rects if any(R.x0 <= c["bbox"][0] and c["bbox"][2] <= R.x1 and R.y0 <= c["bbox"][1] and c["bbox"][3] <= R.y1 and HEB.match(c["c"]) for c in cs))
         ok = len(rects) == EXP["diagram_blocks"] and inside == len(rects)
