@@ -1,6 +1,6 @@
 # Supplemental role check
 
-The original research, writing and review runs are recorded in `docs/agents/log.md`. These three prompts were issued separately through Codex collaboration after the book was completed, with the new project Skill supplied to each agent.
+These are three instructions **prepared** for checking the Researcher, Writer and Reviewer roles with their project Skills, after the book was completed. **No run of these prompts is recorded:** the project has no log row, transcript or result for them. The original research, writing and review runs are recorded in [`docs/agents/log.md`](../docs/agents/log.md).
 
 ## Researcher
 
