@@ -1,0 +1,6 @@
+class 1 FAILED (failures=1) ['test_other_class']
+Traceback (most recent call last):
+  File <scratch>/f3\kill.py", line 14, in <module>
+    for a,b in ps: assert a in s,(n,a); s=s.replace(a,b,1)
+                   ^^^^^^^^^^^^^^^^^^^
+AssertionError: ('xmp', '    yield "bookmarks", "\n".join(t for _, t, _ in doc.get_toc())\n')

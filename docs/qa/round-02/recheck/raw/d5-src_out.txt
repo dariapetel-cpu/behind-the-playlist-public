@@ -1,0 +1,161 @@
+--M3/N13
+M3 plain => exit 1 [9, 1, 1] ['infra.privacy-files@all text files'] 
+M3 dotted => exit 0 [10, 0, 1] ALL-PASS 
+M3 slash 8/1 => exit 0 [10, 0, 1] ALL-PASS 
+M3 underscore pre => exit 1 [9, 1, 1] ['infra.privacy-files@all text files'] 
+M3 comma groups => exit 0 [10, 0, 1] ALL-PASS 
+M3 newline split => exit 0 [10, 0, 1] ALL-PASS 
+M3 letter after => exit 0 [10, 0, 1] ALL-PASS 
+M3 letter before => exit 0 [10, 0, 1] ALL-PASS 
+M3 Hebrew glued => exit 1 [9, 1, 1] ['infra.privacy-files@all text files'] 
+M3 html nbsp => exit 0 [10, 0, 1] ALL-PASS 
+M3 4-5 hyphen no word => exit 1 [9, 1, 1] ['infra.privacy-files@all text files'] 
+M3 double space 3 3 3 => exit 0 [10, 0, 1] ALL-PASS 
+M3 year before => exit 0 [10, 0, 1] ALL-PASS 
+M3 9 digits then space 1 => exit 0 [10, 0, 1] ALL-PASS 
+M3 date after => exit 0 [10, 0, 1] ALL-PASS 
+M3 two IDs adjacent => exit 0 [10, 0, 1] ALL-PASS 
+M3 list comma => exit 1 [9, 1, 1] ['infra.privacy-files@all text files'] 
+M3 after "3." => exit 0 [10, 0, 1] ALL-PASS 
+M3 0-padded ten => exit 0 [10, 0, 1] ALL-PASS 
+M3 csv => exit 1 [9, 1, 1] ['infra.privacy-files@all text files'] 
+M3 csv int neighbours => exit 0 [10, 0, 1] ALL-PASS 
+M3 fake under nested .venv2 => exit 1 [9, 1, 1] ['infra.privacy-files@all text files'] 
+M3 svg => exit 1 [9, 1, 1] ['infra.privacy-files@all text files'] 
+M3 folder name => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M3 name w/ underscores => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M3 allow-list abuse => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+--M4
+M4 \addvspace{1cm} => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M4 \vfil => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M4 \centering => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M4 \begin{tabular*}{5cm}{l}x\end{tabular*} => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M4 \begin{tabular}{p{3cm}}x\end{tabular} => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M4 \noindent\hrule => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M4 \enspace => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M4 \quad => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M4 \smash{x} => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M4 \begingroup\parindent=0pt\endgroup => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M4 \vspace  {1cm} => exit 1 [8, 2, 1] ['infra.iron-law@book/chapters/', 'infra.privacy-names@file and folde'] 
+M4 \begin{figure*}[!h]\end{figure*} => exit 1 [8, 2, 1] ['infra.iron-law@book/chapters/', 'infra.privacy-names@file and folde'] 
+M4 \NewDocumentCommand\x{}{} => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M4 \needspace{3cm} => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M4 \colorbox{red}{x} => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M4 \hskip1cm => exit 1 [8, 2, 1] ['infra.iron-law@book/chapters/', 'infra.privacy-names@file and folde'] 
+M4 \vtop{x} => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M4 \newline => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M4 \textwidth=3cm => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M4 \begin{spacing}{2}x\end{spacing} => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M4 \smallbreak => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M4 \gdef\x{} => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M4 \includegraphics{noa_week.pdf} => exit 1 [8, 2, 1] ['infra.iron-law@book/chapters/', 'infra.privacy-names@file and folde'] 
+M4 \\[2mm] => exit 1 [8, 2, 1] ['infra.iron-law@book/chapters/', 'infra.privacy-names@file and folde'] 
+M4 \color{red} => exit 1 [8, 2, 1] ['infra.iron-law@book/chapters/', 'infra.privacy-names@file and folde'] 
+M4 \begin{turn}{90}x\end{turn} => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M4 \csname vspace\endcsname{1cm} => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M4 \tabcolsep0pt => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M4 \subimport{}{x} => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+--M5
+M5 \begin{tcblisting}{}x\end{tcblisting} => exit 0 [0, 0, 1] ALL-PASS 
+M5 \begin{Verbatim}x\end{Verbatim} => exit 1 [0, 1, 0] ['code.boxes@book/chapters'] 
+M5 \begin{BVerbatim}x\end{BVerbatim} => exit 0 [0, 0, 1] ALL-PASS 
+M5 \begin{lstlisting*}x => exit 0 [0, 0, 1] ALL-PASS 
+M5 \lstinline|x| => exit 1 [0, 1, 0] ['code.boxes@book/chapters'] 
+M5 \mintinline{py}{x} => exit 1 [0, 1, 0] ['code.boxes@book/chapters'] 
+M5 \begin{listing}x\end{listing} => exit 0 [0, 0, 1] ALL-PASS 
+M5 \begin{filecontents}{x}x\end{filecontents} => exit 0 [0, 0, 1] ALL-PASS 
+M5 \inputminted{python}{x.py} => exit 1 [0, 1, 0] ['code.boxes@book/chapters'] 
+M5 \begin{algorithm}x\end{algorithm} => exit 0 [0, 0, 1] ALL-PASS 
+M5 \texttt{print(1)} => exit 0 [0, 0, 1] ALL-PASS 
+M5 \begin{ lstlisting }x => exit 1 [0, 1, 0] ['code.boxes@book/chapters'] 
+M5 \py{x} => exit 0 [0, 0, 1] ALL-PASS 
+M5 \begin{python}x\end{python} => exit 0 [0, 0, 1] ALL-PASS 
+--false alarms
+FA comment vspace => exit 1 [9, 1, 2] ['infra.privacy-names@file and folde'] 
+FA trailing comment vspace => exit 1 [9, 1, 2] ['infra.privacy-names@file and folde'] 
+FA sha256 => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+FA sha digits run => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+FA doi => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+FA isbn => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+FA doi9 => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+FA isbn13 => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+FA phone => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+FA doi 9-digit => exit 1 [8, 2, 1] ['infra.privacy-files@all text files', 'infra.privacy-names@file and folde'] 
+FA arxiv => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+FA timestamp => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+FA bytes => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+FA epoch => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+FA nine digit size => exit 1 [8, 2, 1] ['infra.privacy-files@all text files', 'infra.privacy-names@file and folde'] 
+FA issn => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+FA orcid => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+FA ip => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+FA table nums => exit 1 [8, 2, 1] ['infra.privacy-files@all text files', 'infra.privacy-names@file and folde'] 
+FA ranges => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+--H2
+H2 no blg => exit 1 [19, 1, 0] ['typeset.biber@main.log'] 
+    check_pdf exit 0 PASS (automated checks). Visual inspection still required.
+H2 empty blg => exit 1 [19, 1, 0] ['typeset.biber@main.blg'] 
+    check_pdf exit 0 PASS (automated checks). Visual inspection still required.
+H2 blg of killed biber => exit 0 [20, 0, 0] ALL-PASS 
+    check_pdf exit 0 PASS (automated checks). Visual inspection still required.
+--H3
+H3 control ok => exit 0 [20, 0, 0] ALL-PASS 
+    check_pdf exit 0 PASS (automated checks). Visual inspection still required.
+H3 whitespace log => exit 1 [18, 2, 0] ['typeset.check-pdf@behind-the-pla', 'cls.log@build log'] 
+    check_pdf exit 1   - log: no 'Output written on' line (the build did not complete)
+H3 Windows path error => exit 0 [20, 0, 0] ALL-PASS 
+    check_pdf exit 0 PASS (automated checks). Visual inspection still required.
+H3 C:\ path error => exit 0 [20, 0, 0] ALL-PASS 
+    check_pdf exit 0 PASS (automated checks). Visual inspection still required.
+H3 path with spaces => exit 1 [19, 1, 0] ['typeset.check-pdf@behind-the-pla'] 
+    check_pdf exit 1   - errors=1
+H3 lua error => exit 0 [20, 0, 0] ALL-PASS 
+    check_pdf exit 0 PASS (automated checks). Visual inspection still required.
+H3 lua bang => exit 1 [19, 1, 0] ['typeset.check-pdf@behind-the-pla'] 
+    check_pdf exit 1   - errors=1
+H3 two runs, second killed => exit 0 [20, 0, 0] ALL-PASS 
+    check_pdf exit 0 PASS (automated checks). Visual inspection still required.
+H3 multiply defined => exit 0 [20, 0, 0] ALL-PASS 
+    check_pdf exit 0 PASS (automated checks). Visual inspection still required.
+H3 empty bibliography => exit 0 [20, 0, 0] ALL-PASS 
+    check_pdf exit 0 PASS (automated checks). Visual inspection still required.
+H3 font shape undefined => exit 0 [20, 0, 0] ALL-PASS 
+    check_pdf exit 0 PASS (automated checks). Visual inspection still required.
+H3 vbox alignment => exit 1 [19, 1, 0] ['typeset.check-pdf@behind-the-pla'] 
+    check_pdf exit 1   - overfull>2pt: Overfull \vbox (7.1pt too high) detected at line 9
+H3 hbox 2.01 => exit 1 [19, 1, 0] ['typeset.check-pdf@behind-the-pla'] 
+    check_pdf exit 1   - overfull>2pt: Overfull \hbox (2.01pt too wide) in alignment at lines 1--3
+H3 biblatex please rerun => exit 1 [19, 1, 0] ['typeset.check-pdf@behind-the-pla'] 
+    check_pdf exit 1   - reruns=1
+H3 biblatex run biber => exit 1 [19, 1, 0] ['typeset.check-pdf@behind-the-pla'] 
+    check_pdf exit 1   - reruns=1
+H3 wrapped cite => exit 1 [19, 1, 0] ['typeset.check-pdf@behind-the-pla'] 
+    check_pdf exit 1   - undef_cites=1
+H3 other class => exit 1 [18, 2, 0] ['typeset.check-pdf@behind-the-pla', 'cls.log@build log'] 
+    check_pdf exit 1   - log: class behind-the-playlist not loaded
+H3 missing char => exit 1 [19, 1, 0] ['typeset.check-pdf@behind-the-pla'] 
+    check_pdf exit 1   - missing_chars=1
+N9 main.txt => exit 1 [19, 1, 0] ['typeset.biber@main.txt'] 
+    check_pdf exit 0 PASS (automated checks). Visual inspection still required.
+N9 main.log.txt => exit 1 [19, 1, 0] ['typeset.biber@main.log.txt'] 
+    check_pdf exit 0 PASS (automated checks). Visual inspection still required.
+N9 other.log with main.blg => exit 1 [19, 1, 0] ['typeset.biber@other.log'] 
+    check_pdf exit 0 PASS (automated checks). Visual inspection still required.
+N9 main.blg as log => exit 1 [19, 1, 0] ['typeset.biber@main.blg'] 
+    check_pdf exit 0 PASS (automated checks). Visual inspection still required.
+--CLI L3 N10 N11
+L3 abs outside => exit 0 findings fresh <scratch>/d5\cli\findings.json 
+L3 rel outside other cwd => exit 0 findings fresh <scratch>/d5\cli\findings.json 
+L3 C:\Windows junk => exit 2 findings absent   [--users-approval USERS_APPROVAL] qa_lib.py: error: --pdf cannot be opened: FileDataError
+N10 --out= => exit 2 findings absent  PPROVAL] qa_lib.py: error: --log: file not found (use --no-log when there is no build log)
+N10 rel out => exit 2 findings absent  visual-baseline] [--users-approval USERS_APPROVAL] qa_lib.py: error: --pdf: file not found
+N10 pdf is dir => exit 2 findings absent  visual-baseline] [--users-approval USERS_APPROVAL] qa_lib.py: error: --pdf: file not found
+N10 log is dir => exit 2 findings absent  PPROVAL] qa_lib.py: error: --log: file not found (use --no-log when there is no build log)
+N11 typo => exit 2 findings absent  cks ['typest']; known: typeset, bidi, table, img, code, footer, infra, cls-version, visual
+N11 empty checks => exit 2 findings absent  wn checks ['']; known: typeset, bidi, table, img, code, footer, infra, cls-version, visual
+N11 edition submission => exit 1 findings STALE <scratch>/d5\cli\findings.json 
+N11 bad edition => exit 2 findings absent  ib.py: error: argument --edition: invalid choice: 'x' (choose from 'submission', 'public')
+N10 abbreviated --ou => exit 2 findings STALE  <scratch>/d5\cli
+H2 check_pdf.py missing => exit 1 findings fresh <scratch>/d5\cli\findings.json 
+N10 broken expectations => exit 1 findings STALE  ONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+N11 encrypted PDF => exit 1 findings STALE <scratch>/d5\cli\findings.json 

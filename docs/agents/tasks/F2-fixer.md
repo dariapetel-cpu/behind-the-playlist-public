@@ -1,0 +1,22 @@
+# F2 Fixer: fix the QA harness (QA round 2)
+
+Input: `docs/qa/round-02/detect/detector-report.md` (D4). Follow `.claude/skills/fixer/SKILL.md`. Scope for this task, extended by Roni Sagi's prompt (`prompts/qa-round-02-01-implementation.md`, steps 4-6), is exactly: `tools/qa/**`, `tools/check_pdf.py`, `.claude/skills/{qa-*,detector,fixer}/SKILL.md`, `tests/test_qa_mutations.py`, `docs/qa/round-02/fix/fixer-report.md`. Nothing under `book/`, `pdf/`, `figures/`; no other docs; no class change, so no candidate build. No git commit/push, no installs, no TeX.
+
+## Required behaviour
+1. **Exit codes**: `qa_lib.py` exits 1 on any fail, 2 on usage errors/crash, 0 otherwise. A check that raises becomes a fail finding. Any old `findings.json` in `--out` is removed at start. Unknown check names and outside paths are handled.
+2. **No silent skips**: a missing target (p.9 table, Fig. 6.1, `.blg`, footer pages) is a fail. Every family has a declared minimum of findings.
+3. **Logs**: require a completed LuaLaTeX log of this class whose `Output written on` page count equals the PDF's. Unwrap 79-column lines; count `file:line:` errors, fatal errors, rerun requests, and overfull `\vbox` > 2 pt. Only a `.log` name may yield a `.blg`. Since the public repo has no log, add an explicit `--no-log`: log-dependent checks are then reported `n/a` with the reason, never pass. Preserve the check_pdf failure reasons in the evidence.
+4. **Visual visibility, not just text layer** (new family `visual` and Skill `qa-visual`): (a) without a baseline: every non-blank text span must have rendered contrast at its place, per page including the cover; page rotation is 0; no annotations other than links; Fig. 2.1 and Fig. 6.1 regions show the expected palette ink; table 4.1 and the p.9 table are legible; (b) a coarse per-page render fingerprint of the approved PDF, in `tools/qa/visual_baseline.json` with a tolerance you calibrate and justify, regenerated only by an explicit command and only with the users' approval. State what each misses.
+5. **Text completeness**: chapter sources vs PDF text per chapter page range (normalised words, documented threshold), so removed prose fails.
+6. **Figure/table evidence comes from the figure's own page and region** (Fig. 2.1 is on p.7; Fig. 6.1 phrases inside p.14).
+7. **Privacy**: scan by pattern, not by IDs declared in main.tex; normalise spaces/hyphens, UTF-16, filenames; scan PDF text and metadata on all pages; path-part exclusion of `.git`, `.venv`; narrow justified allow-list (hash/DOI/transcript numbers are false positives: use the Israeli ID check digit or context to reduce noise, documented). Never print a value. Detecting an ID on the cover must report, not crash. IDs inside raster images cannot be read: say so.
+8. **Iron law**: comment-aware; a deny-list of layout commands that the current chapters pass unless genuinely violating. If the existing `\begin{figure}[t]` in chapter 2 would fail, do not edit the chapter: allow it explicitly and flag it.
+9. **qa-code** inspects chapter sources (comment-aware) before n/a; code present without a working check fails.
+10. **Infra**: all chapters 00-08, non-empty; bib has the expected entry count; README non-empty; images and reference links checked.
+11. Skills: quote the 8 broken YAML descriptions; update text to the new behaviour; default inputs must exist or be marked as submission-only; detector Skill: every check needs a negative test and passing evidence must be read; fixer Skill: replace the stale SHA rule with a hash recorded at the start, and require a mutation test per fixed harness defect.
+12. Works on Windows and POSIX; no new dependency (a YAML test may do a small stdlib check).
+
+## Tests
+`tests/test_qa_mutations.py` (unittest, stdlib + pymupdf; `python -m unittest discover -s tests`): valid input passes (incl. exit code 0 via subprocess); one test per D4 claim and per N-finding that you fix, asserting the **specific** check fails, and a whole-run exit code 1. Mutate copies in temp directories only. Assert that the tracked PDF's hash is unchanged. Logs in tests are synthetic fixtures and labelled so. Tests must not pass on the old code: run them against the old `qa_lib.py`/`check_pdf.py` (from `git show HEAD:`) in scratch and report how many fail.
+
+Do not weaken any expectation; give a reason for each `expectations.json` change. N-findings you leave open go in the report with a reason. The report gives, per finding: fixed / partly / open, files, test name; and verbatim actual test totals. Final reply: at most 12 lines.
