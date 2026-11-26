@@ -18,6 +18,9 @@ The Skills used in this project (A2 §5: "list of the Skills used in the project
 | `qa-footer` | Playback footer on every page, including the p.19 regression | same | D1, D2 |
 | `qa-infra` | Required files, iron law, README links, ID-leak scan, ZIP freshness | same | D1, D2 |
 | `qa-cls-version` | Class version: `\ProvidesClass` = CHANGELOG = build log | same | D1, D2 |
+| `qa-visual` | Rendered visibility of every character, figure and table ink, approved page fingerprint (QA round 2) | `SKILL.md` + `tools/qa/qa_lib.py`, `tools/qa/visual_baseline.json` | Its checks ran through `qa_lib.py` in F2, D5 (unfinished) and the coordinator's pass; no Skill-tool call verified |
+
+**QA round 2 (2026-11-25):** the `detector` role ran as agents D4 and D5 (D5 stopped, no report) and `fixer` as F2. All qa-* Skills were updated; eight had invalid YAML descriptions and now load with them. Harness tests: `python -m unittest discover -s tests`. Record: `docs/qa/round-02/`.
 
 **Shared data:** `tools/qa/expectations.json`.
 **Run records:** `docs/qa/round-01/`, `docs/agents/log.md` rows 6–8 and `docs/agents/transcripts/D1-*`, `F1-*`, `D2-*`.
