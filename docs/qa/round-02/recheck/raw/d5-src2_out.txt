@@ -1,0 +1,27 @@
+M3 name w/ underscores => exit 1 [9, 1, 1] ['infra.privacy-names@file and folde'] 
+M3 allow-list abuse other file => exit 0 [10, 0, 1] ALL-PASS 
+--M4
+M4 \addvspace{1cm} => exit 0 [10, 0, 1] ALL-PASS 
+M4 \vfil => exit 0 [10, 0, 1] ALL-PASS 
+M4 \centering => exit 0 [10, 0, 1] ALL-PASS 
+M4 \begin{tabular*}{5cm}{l}x\end{tabular*} => exit 0 [10, 0, 1] ALL-PASS 
+M4 \begin{tabular}{p{3cm}}x\end{tabular} => exit 0 [10, 0, 1] ALL-PASS 
+M4 \noindent\hrule => exit 0 [10, 0, 1] ALL-PASS 
+M4 \enspace => exit 0 [10, 0, 1] ALL-PASS 
+M4 \quad => exit 0 [10, 0, 1] ALL-PASS 
+M4 \smash{x} => exit 0 [10, 0, 1] ALL-PASS 
+M4 \begingroup\parindent=0pt\endgroup => exit 0 [10, 0, 1] ALL-PASS 
+M4 \vspace  {1cm} => exit 1 [9, 1, 1] ['infra.iron-law@book/chapters/'] 
+M4 \begin{figure*}[!h]\end{figure*} => exit 1 [9, 1, 1] ['infra.iron-law@book/chapters/'] 
+M4 \NewDocumentCommand\x{}{} => exit 0 [10, 0, 1] ALL-PASS 
+M4 \needspace{3cm} => exit 0 [10, 0, 1] ALL-PASS 
+M4 \colorbox{red}{x} => exit 0 [10, 0, 1] ALL-PASS 
+M4 \hskip1cm => exit 1 [9, 1, 1] ['infra.iron-law@book/chapters/'] 
+M4 \vtop{x} => exit 0 [10, 0, 1] ALL-PASS 
+M4 \newline => exit 0 [10, 0, 1] ALL-PASS 
+M4 \textwidth=3cm => exit 0 [10, 0, 1] ALL-PASS 
+M4 \begin{spacing}{2}x\end{spacing} => exit 0 [10, 0, 1] ALL-PASS 
+M4 \smallbreak => exit 0 [10, 0, 1] ALL-PASS 
+M4 \gdef\x{} => exit 0 [10, 0, 1] ALL-PASS 
+M4 \includegraphics{noa_week.pdf} => exit 1 [9, 1, 1] ['infra.iron-law@book/chapters/'] 
+M4 \\[2mm] => exit 1 [9, 1, 1] ['infra.iron-law@book/chapters/'] 

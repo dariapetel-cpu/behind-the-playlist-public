@@ -74,6 +74,61 @@
 
 ההערות הקלות מ־review-02 תוקנו לאחר מכן בידי ה־Boss בלבד, ולא נערך סבב ביקורת שלישי.
 
+## בקרת איכות (סבב 2, 25.11.2026)
+
+ביקורת עצמאית מצאה שכלי ה־QA אישר PDF גם כשתוכן הוסתר או נמחק. התיקון נעשה בכלים וב־Skills, בלי לשנות את הספר או את ה־PDF.
+
+- **סוכנים שהורצו:** Detector (D4) ו־Fixer (F2) הושלמו. סוכן האימות D5 **נעצר לפני שכתב דוח**; הפערים שמצא בפרטיות, בלוגים, בתוצאות ישנות ובהגנת הטסטים תוקנו בידי המתאם, בלי אימות עצמאי נוסף.
+- **תוצאות:** הרצה מלאה של הקוד הסופי לא הושלמה: היא נעצרה בגלל זיכרון נמוך במחשב, אחרי ש־69 בדיקות עברו ו־0 נכשלו; 72 בדיקות לא רצו. באימות ממוקד קודם עברו 88 בדיקות מוטציה ו־2 בדיקות קיימות. בפרויקט האמיתי: 107 עברו, 0 נכשלו, 5 לא נבדקו או לא רלוונטיות.
+- **מגבלות:** לא נבדק לוג LaTeX אמיתי, וכיסויים קטנים מאוד עדיין אינם מתגלים.
+
+[דוח הסבב והמגבלות](docs/qa/round-02/README.md) · [תחקיר INC-003](docs/incidents/INC-003-qa-passes-invisible-content.md) · [רשימת ה־Skills](SKILLS.md) · [פרומפט היישום](prompts/qa-round-02-01-implementation.md)
+
+<div dir="ltr">
+
+```bash
+python -m unittest discover -s tests     # about 10 minutes or more
+python tools/qa/qa_lib.py --pdf pdf/behind-the-playlist.pdf --no-log --checks all --out build/qa
+```
+
+</div>
+
+## Beyond Standard QA – Creative Engineering Approach
+
+**השאלה שהנחתה אותנו:** לא „האם הספר עובר את הבדיקות?", אלא „האם הבדיקות היו נכשלות אילו הספר היה שבור?". בדיקות מוטציה, השוואה לרינדור ותחקיר תקלות הן שיטות מוכרות בהנדסת תוכנה. החידוש שלנו צנוע: הפנינו אותן אל כלי ה־QA של ספר LaTeX דו־כיווני, ובדקנו גם את ה־Detector עצמו.
+
+**דוגמה מהממצאים בפועל ([D4](docs/qa/round-02/detect/detector-report.md)):** כלי ה־QA הקודם קרא בעיקר את שכבת הטקסט של ה־PDF. כשכיסינו כל עמוד במלבן לבן, הקורא כבר לא ראה דבר, אבל הכלי דיווח **‏55 עברו, 0 נכשלו, קוד יציאה 0**. גם כיסוי של השער, של גרף 2.1 או של טבלה 4.1 עבר בלי הערה. ה־Detector של סבב 1 לא יכול היה לגלות זאת, כי הריץ את הבדיקות רק על PDF תקין, ושם בדיקה עיוורת ובדיקה תקינה נראות אותו דבר.
+
+| כלי | הערך ההנדסי | מה הוכח בפועל |
+|---|---|---|
+| **בדיקות מוטציה** | כל בדיקה מוכיחה שהיא **נכשלת** על עותק פגום, ולא רק עוברת על הספר התקין | 25 הטסטים החדשים של השלב האחרון, על הקוד שלפני התיקון: 17 נכשלו. 5 מתוך 5 תיקונים שבוטלו בכוונה התגלו |
+| **QA חזותי** | בודק מה שהקורא רואה ברינדור: נראות של כל תו, צבעי האיורים וטביעת עמוד מול ה־PDF המאושר | הכיסויים מהדוגמה נכשלים כעת. כיסויים קטנים מאוד עדיין עוברים |
+| **אימות עצמאי** | סוכן נפרד תוקף את התיקון במוטציות משלו, ולא רק מריץ את טסטי ה־Fixer | ה־Fixer דיווח 116 טסטים תקינים, וסוכן האימות D5 עדיין מצא פערים בפרטיות, בלוגים ובתוצאות ישנות. **D5 נעצר לפני שכתב דוח** |
+| **תחקיר שורש** | מסביר למה המנגנון נכשל, ולא רק מה תוקן | [INC-003](docs/incidents/INC-003-qa-passes-invisible-content.md): הלקח של INC-002 („כל בדיקה צריכה טסט שלילי") נכתב בדוח, אבל לא נאכף ב־Skill או בטסט. עכשיו הוא חלק מה־Skills של ה־Detector וה־Fixer |
+
+<div dir="ltr">
+
+```mermaid
+flowchart LR
+  A["Audit<br/>damage copies of the PDF"] --> D["Detector D4<br/>reproduce every claim"]
+  D -->|"26 findings"| F["Fixer F2<br/>change tools and Skills<br/>+ a mutation test per fix"]
+  F -->|"116 tests OK"| V["Verifier D5<br/>own mutations,<br/>switch fixes off"]
+  V -->|"gaps found;<br/>stopped, no report"| C["Coordinator<br/>targeted fixes 1-3, 7"]
+  C --> T{"Full test run<br/>141 tests"}
+  T -->|"69 pass, 0 fail"| OK["verified part"]
+  T -.->|"72 not run<br/>(low memory)"| OPEN["open: run again"]
+  OPEN -.-> V
+  F -. "root cause" .-> I["INC-003<br/>rule into the Skills"]
+  I -. "prevention" .-> D
+```
+
+</div>
+
+**מה הושלם ומה לא:**
+- **הושלם:** כל השלבים בתרשים עד ההרצה המלאה. ההרצה המלאה האחרונה נעצרה בגלל זיכרון נמוך: **69 עברו, 0 נכשלו, 72 לא הושלמו**. לכן אין עדיין הרצה מלאה של הקוד הסופי.
+- **לא אומת:** התיקונים האחרונים לא אומתו בידי סוכן עצמאי. גם לוג LaTeX אמיתי, Linux ו־macOS לא נבדקו.
+- **כל הפרטים והמגבלות:** [דוח הסבב](docs/qa/round-02/README.md).
+
 ## בנייה
 
 **סביבה שנבדקה:** macOS 14 (Intel) עם TeX Live 2026 (BasicTeX). הגופנים מצורפים לפרויקט בתיקייה [book/fonts/](book/fonts/SOURCES.md), תחת רישיון OFL 1.1, ולכן הבנייה אינה תלויה בגופני מערכת:
@@ -133,7 +188,7 @@ docs/            prompts.md, outline.md, screenshots/, agents/ (brief, log, rese
 .claude/agents/  researcher.md, writer.md, reviewer.md
 pdf/             behind-the-playlist.pdf (public edition: no student IDs, no submission date)
 PRD.md · Makefile · requirements.txt
-tests/           Hebrew RTL / style / diagram smoke tests
+tests/           Hebrew RTL / style / diagram smoke tests; QA mutation tests
 ```
 
 </div>

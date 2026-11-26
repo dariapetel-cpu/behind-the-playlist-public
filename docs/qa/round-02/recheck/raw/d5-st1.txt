@@ -1,0 +1,20 @@
+visibility off [H1Visual]: KILLED by test_h1_cover_covered | FAILED (failures=1)
+exit 0 [Figures]: KILLED by test_dark_page_background | FAILED (failures=1)
+accept empty log [H3Logs]: KILLED by test_empty_log | FAILED (failures=1)
+drop LuaLaTeX header rule [H3Logs]: KILLED by test_empty_log | FAILED (failures=1)
+drop class rule [H3Logs]: SURVIVED | OK
+blg absent = n/a [H2NoSilentSkips]: KILLED by test_blg_absent | FAILED (failures=1)
+fingerprint tolerance x10 [H1Visual]: KILLED by test_removed_arrow_changes_the_fingerprint | FAILED (failures=1)
+fingerprint off [H1Visual]: KILLED by test_n1_every_page_white | FAILED (failures=1)
+MIN_INK 60->5 [H1Visual]: KILLED by test_n18_near_white_text | FAILED (failures=1)
+iron law off [Sources]: KILLED by test_allowed_figure_is_allowed_once_only | FAILED (failures=1)
+iron law keeps comments [Sources]: KILLED by test_n16_comment_is_not_layout | FAILED (failures=1)
+stale unlink removed [Cli]: KILLED by test_log_and_no_log | FAILED (failures=1)
+min_findings off [H2NoSilentSkips]: KILLED by test_declared_minimum_is_enforced | FAILED (failures=1)
+ODD grouping off [Privacy]: KILLED by test_n13_spaced_hyphenated_grouped | FAILED (failures=1)
+XMP+bookmark+attachment scan off [Privacy]: SURVIVED | OK
+form+annotation ID scan off [Privacy]: SURVIVED | OK
+raster off [H1Visual Privacy]: KILLED by test_n6_wrong_image_over_formulas | FAILED (failures=1)
+footer visibility off [H1Visual]: KILLED by test_n3_p19_footer_covered | FAILED (failures=1)
+footer dot colour only off [H1Visual Figures]: SURVIVED | OK
+footer.dot always true [H1Visual Figures H2NoSilentSkips]: SURVIVED | OK

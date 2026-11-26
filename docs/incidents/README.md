@@ -6,6 +6,7 @@ Incident analysis for bugs we found ourselves (Moodle announcement, MA-4, `docs/
 |---|---|---|---|---|
 | [INC-001](INC-001-reversed-tikz-labels.md) | Reversed Hebrew word order in TikZ diagram labels | Daria (human reader), after a coordinator PASS | 2026-11-11 | Closed |
 | [INC-002](INC-002-qa-bib-check-false-pass.md) | The QA bibliography check could pass without the heading | Detector agent (QA round 1, D1-02) | 2026-11-18 | Closed |
+| [INC-003](INC-003-qa-passes-invisible-content.md) | The QA harness passed a book whose content could not be seen | Independent audit; reproduced by the Detector agent (D4) | 2026-11-25 | Fixed for the reproduced cases; awaiting review |
 
 **Pending reports.** These are genuine findings that are already recorded but don't have a report yet (`TODO.md` P6):
 - the tlmgr mirror hang;

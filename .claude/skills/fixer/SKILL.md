@@ -11,9 +11,10 @@ description: Fixer role for the book's red-team QA. Reads the detector report, f
 1. **Classify** every finding by `kind`:
    - `template` → fix in `book/behind-the-playlist.cls`, and bump the class version plus a CHANGELOG line.
    - `skill` → fix in `.claude/skills/*` or `tools/qa/*`. Fixing a skill may never weaken an expectation to hide a real defect; any change to `expectations.json` needs a stated reason.
+     **Every fixed harness defect needs a mutation test** in `tests/test_qa_mutations.py` that fails on the old code and passes on the new code; state both results in the report. Never regenerate `tools/qa/visual_baseline.json` without the users' approval.
    - `content` (wording, facts, sources) → **flag for the users.** Do not edit chapters.
    - `packaging` or `build` (ZIP, GitHub, installs) → **flag for the users.**
-2. **If at least one fix was made,** build the candidate:
+2. **If at least one class (template) fix was made,** build the candidate (a harness-only fix needs none):
    `make candidate` (→ `build/behind-the-playlist-candidate.pdf`, own output folder `build/candidate/`).
    - Never copy anything into `submission/`.
    - Never overwrite `build/behind-the-playlist-lualatex.pdf`.
@@ -25,4 +26,4 @@ description: Fixer role for the book's red-team QA. Reads the detector report, f
 
 ## Rules
 - The iron law (A2 p. 3): rendering and layout fixes go into the CLS or a Skill, never into chapter text.
-- `submission/behind-the-playlist.pdf` (approved, SHA-256 43608a86…) must remain byte-identical.
+- The approved PDF (`pdf/behind-the-playlist.pdf` in the public edition, `submission/behind-the-playlist.pdf` in the submission edition) must remain byte-identical: record its SHA-256 at the start, compare it at the end, and put both in the report.

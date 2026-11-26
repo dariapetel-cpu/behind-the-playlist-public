@@ -1,0 +1,5 @@
+xmp 1 FAILED (failures=2) ['test_xmp', 'test_bookmark']
+form 1 FAILED (failures=2) ['test_annotation', 'test_form_field']
+dotcol 1 FAILED (failures=1) ['test_dot_covered_by_grey']
+dotord 1 FAILED (failures=1) ['test_dot_order']
+pre-fix code (F2 state): ['Ran 25 tests in 57.857s', '', 'FAILED (failures=31)'] ['test_abbreviated_out', 'test_attachment_content', 'test_attachment_without_id', 'test_biber_killed', 'test_broken_expectations', 'test_custom_info_key', 'test_empty_bibliography', 'test_encrypted_pdf', 'test_javascript', 'test_layer_switched_off', 'test_loose_forms_with_valid_check_digit', 'test_lua_error', 'test_metadata_dotted', 'test_multiply_defined', 'test_ordinary_numbers_pass', 'test_second_run_killed', 'test_windows_path_error']

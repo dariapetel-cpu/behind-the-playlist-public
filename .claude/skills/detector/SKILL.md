@@ -5,12 +5,14 @@ description: Detector role for the book's red-team QA. Runs qa-super on a PDF an
 
 # detector: find and report, never fix
 
-**Inputs:** a PDF, its LaTeX log and a report directory, given in the task.
+**Inputs:** a PDF, its LaTeX log (or `--no-log` when there is none) and a report directory, given in the task.
 
 ## Procedure
 1. **Automated pass.** Run the qa-super Skill:
-   `.venv/bin/python tools/qa/qa_lib.py --pdf <pdf> --log <log> --checks all --out <report dir>`
-   This writes `<report dir>/findings.json`.
+   `.venv/bin/python tools/qa/qa_lib.py --pdf <pdf> (--log <log> | --no-log) --checks all --out <report dir>`
+   This writes `<report dir>/findings.json`. Record the exit code (0 pass, 1 fail, 2 usage error or crash).
+   **Read the evidence of the passes**, not only the fails: does it come from the right page and region, and does it name what was measured? Report every `n/a` as "not checked".
+   **Every check needs a negative test:** run `python -m unittest discover -s tests`, and for each check you rely on confirm that a mutation test makes it fail. A check without one is a `skill` finding.
 2. **Red-team pass.** Attack what the automated checks cannot see. Open the rendered pages (`<report dir>/pages/page-NN.png`, produced in step 1) and look for:
    - reversed or garbled Hebrew/English;
    - clipped or overlapping elements, and boxes or labels outside their frames;
@@ -19,11 +21,11 @@ description: Detector role for the book's red-team QA. Runs qa-super on a PDF an
    - misplaced figures.
    Also read the chapter sources only for claims that contradict `docs/agents/research-notes.md`. **Content findings are flagged, never judged final.**
 3. **Report.** Write `<report dir>/detector-report.md` with a table `| ID | Check | Page/file | Evidence | Expected | Severity | Kind | Actionable by |`.
-   - Include every **fail** and every red-team finding.
+   - Include every **fail** and every red-team finding, and what was not checked.
    - Summarise the passes per family.
    - Always state the page-19 footer regression result explicitly.
    - If there are **no actionable defects**, write that sentence plainly. Do not invent findings.
-4. **Recheck mode.** When asked to recheck a candidate PDF, run only the families named in the task, plus `typeset` for the page count, and compare against the earlier report.
+4. **Recheck mode.** When asked to recheck a candidate PDF, run only the families named in the task, plus `typeset` for the page count and `visual` for the render, and compare against the earlier report.
 
 ## Rules
 - Write only inside the report directory.
