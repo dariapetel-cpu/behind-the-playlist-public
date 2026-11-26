@@ -74,7 +74,7 @@
       "מרצה: ד״ר יורם סגל"
     ],
     "forbidden_labels": ["תאריך הגשה", "ת״ז"],
-    "forbidden_patterns": ["\\d{9}", "\\d{1,2}[./]\\d{1,2}[./]\\d{2,4}"]
+    "forbidden_patterns": ["\\d{9}", "\\d{1,2}[./]\\d{1,2}[./]\\d{2,4}", "\\d{4}-\\d{1,2}-\\d{1,2}", "\\d"]
   },
   "required_files": [
     "book/main.tex",
@@ -84,9 +84,58 @@
     "TODO.md",
     "README.md",
     "book/references.bib",
+    "book/chapters/00-abstract.tex",
     "book/chapters/01-boker-tov.tex",
+    "book/chapters/02-kol-dilug.tex",
+    "book/chapters/03-anashim-kmotech.tex",
+    "book/chapters/04-shirim-kmo-ze.tex",
+    "book/chapters/05-hasha.tex",
+    "book/chapters/06-shmone-tachanot.tex",
+    "book/chapters/07-bua.tex",
+    "book/chapters/08-play.tex",
     "book/fonts/SOURCES.md"
   ],
+  "page_size": [595.28, 841.89],
+  "page_bg": [242, 242, 242],
+  "raster_images": 0,
+  "chapter_pages": {
+    "00-abstract.tex": [2, 2],
+    "01-boker-tov.tex": [4, 5],
+    "02-kol-dilug.tex": [6, 7],
+    "03-anashim-kmotech.tex": [8, 9],
+    "04-shirim-kmo-ze.tex": [10, 11],
+    "05-hasha.tex": [12, 13],
+    "06-shmone-tachanot.tex": [14, 15],
+    "07-bua.tex": [16, 17],
+    "08-play.tex": [18, 18]
+  },
+  "extra_words_max": {"00-abstract.tex": 1, "01-boker-tov.tex": 12, "02-kol-dilug.tex": 30, "03-anashim-kmotech.tex": 15, "04-shirim-kmo-ze.tex": 13, "05-hasha.tex": 13, "06-shmone-tachanot.tex": 34, "07-bua.tex": 12, "08-play.tex": 4},
+  "regions": {
+    "fig-2.1": {"page": 7, "rect": [75, 80, 521, 276], "min_chars": 162,
+      "palette": [{"rgb": [30, 215, 96], "min_px": 6300}, {"rgb": [255, 46, 136], "min_px": 1550}]},
+    "fig-6.1": {"page": 14, "rect": [71, 425, 529, 588], "min_chars": 125,
+      "palette": [{"rgb": [188, 188, 188], "min_px": 7500}, {"rgb": [191, 243, 210], "min_px": 7200},
+                  {"rgb": [255, 196, 221], "min_px": 4900}, {"rgb": [18, 18, 18], "min_px": 280}]},
+    "table-4.1": {"page": 11, "rect": [70, 192, 525, 329], "min_chars": 452, "palette": []},
+    "table-p9": {"page": 9, "rect": [345, 166, 510, 237], "min_chars": 49, "palette": []},
+    "formulas-p9": {"page": 9, "rect": [85, 206, 507, 356], "min_chars": 242, "palette": []}
+  },
+  "p9_header": ["מאזין/ה", "שיר א", "שיר ב", "שיר ג"],
+  "p9_rows": [["5", "2", "1"], ["4", "3", "0"], ["1", "0", "5"]],
+  "figures": {"2.1": {"page": 7, "tag": "נתונים בדיוניים"}, "6.1": {"page": 14, "tag": "דוגמה לימודית"}},
+  "class_interface": ["scene", "inshort", "lab", "realitycheck", "fictional", "educational", "term", "en",
+    "besidetable", "sidebyside", "comparisontable", "herefigure", "playerbar", "printbookbibliography"],
+  "iron_law_allowed": [
+    {"file": "02-kol-dilug.tex", "code": "\\begin{figure}[t]", "max": 1},
+    {"file": "02-kol-dilug.tex", "code": "\\includegraphics[width=\\textwidth]{noa_week.pdf}", "max": 1}
+  ],
+  "privacy_allowed": [
+    {"file": "docs/agents/transcripts/R1-researcher", "before": "collections/catalog/"},
+    {"file": "docs/agents/transcripts/R1-researcher", "before": "catalogue number "},
+    {"file": "docs/agents/transcripts/R1-researcher", "before": "www.scribd.com/document/"}
+  ],
+  "min_findings": {"typeset": 18, "bidi": 35, "table": 4, "img": 5, "code": 1, "footer": 4, "infra": 12, "cls-version": 2, "visual": 30},
+  "_round_02": "2026-11-25 (QA round 2, F2): every block added between page_size and this line is new and only adds checks. required_files: chapters 00 and 02-08 added. forbidden_patterns: ISO date and any digit added (the approved public cover holds no digit). No earlier expectation was removed or relaxed.",
   "diagram_blocks": 8,
   "_calibration": "2026-11-18 (Prompt 22), before the first Detector run: '(344 שירים)' was a smoke-test phrase, not in the book -> replaced by Fig. 2.1's caption phrase; the wrapped Table 4.1 cell is checked by its first line only (the harness reads table rows across columns)."
 }
