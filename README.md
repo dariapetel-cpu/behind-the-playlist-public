@@ -74,6 +74,25 @@
 
 ההערות הקלות מ־review-02 תוקנו לאחר מכן בידי ה־Boss בלבד, ולא נערך סבב ביקורת שלישי.
 
+## בקרת איכות (סבב 2, 25.11.2026)
+
+ביקורת עצמאית מצאה שכלי ה־QA אישר PDF גם כשתוכן הוסתר או נמחק. התיקון נעשה בכלים וב־Skills, בלי לשנות את הספר או את ה־PDF.
+
+- **סוכנים שהורצו:** Detector (D4) ו־Fixer (F2) הושלמו. סוכן האימות D5 **נעצר לפני שכתב דוח**; הפערים שמצא בפרטיות, בלוגים, בתוצאות ישנות ובהגנת הטסטים תוקנו בידי המתאם, בלי אימות עצמאי נוסף.
+- **תוצאות:** הרצה מלאה של הקוד הסופי לא הושלמה: היא נעצרה בגלל זיכרון נמוך במחשב, אחרי ש־69 בדיקות עברו ו־0 נכשלו; 72 בדיקות לא רצו. באימות ממוקד קודם עברו 88 בדיקות מוטציה ו־2 בדיקות קיימות. בפרויקט האמיתי: 107 עברו, 0 נכשלו, 5 לא נבדקו או לא רלוונטיות.
+- **מגבלות:** לא נבדק לוג LaTeX אמיתי, וכיסויים קטנים מאוד עדיין אינם מתגלים.
+
+[דוח הסבב והמגבלות](docs/qa/round-02/README.md) · [תחקיר INC-003](docs/incidents/INC-003-qa-passes-invisible-content.md) · [רשימת ה־Skills](SKILLS.md) · [פרומפט היישום](prompts/qa-round-02-01-implementation.md)
+
+<div dir="ltr">
+
+```bash
+python -m unittest discover -s tests     # about 10 minutes or more
+python tools/qa/qa_lib.py --pdf pdf/behind-the-playlist.pdf --no-log --checks all --out build/qa
+```
+
+</div>
+
 ## בנייה
 
 **סביבה שנבדקה:** macOS 14 (Intel) עם TeX Live 2026 (BasicTeX). הגופנים מצורפים לפרויקט בתיקייה [book/fonts/](book/fonts/SOURCES.md), תחת רישיון OFL 1.1, ולכן הבנייה אינה תלויה בגופני מערכת:
@@ -133,7 +152,7 @@ docs/            prompts.md, outline.md, screenshots/, agents/ (brief, log, rese
 .claude/agents/  researcher.md, writer.md, reviewer.md
 pdf/             behind-the-playlist.pdf (public edition: no student IDs, no submission date)
 PRD.md · Makefile · requirements.txt
-tests/           Hebrew RTL / style / diagram smoke tests
+tests/           Hebrew RTL / style / diagram smoke tests; QA mutation tests
 ```
 
 </div>

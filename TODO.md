@@ -75,6 +75,18 @@
 - [x] D1-04 label gap: the users decided on a ≈2 mm gap; done and approved (Prompt 25)
 - [x] Promote the QA candidate (class v1.1 + label offset) to `submission/`: approved and done (Prompt 25)
 
+## QA round 2 (2026-11-25, `docs/qa/round-02/`)
+- [x] Reproduce the harness failures (Detector D4)
+- [x] Fix them in the tools and Skills (Fixer F2) and add `tests/test_qa_mutations.py`
+- [x] Targeted fixes 1, 2, 3 and 7 (privacy, logs, stale results, unprotected tests): coordinator, 88 focused tests OK
+- [x] INC-003 incident report
+- [ ] Independent verification: D5 was stopped without a report; only the coordinator verified the targeted fixes
+- [ ] Complete one full test run of the final code: the last run stopped for low memory (69 pass, 0 fail, 72 not run)
+- [ ] Issue 4 (tiny covers), issue 5 (incomplete iron-law and code lists), issue 6 (false alarms on nine-digit numbers)
+- [ ] Run the log checks on a **real** LaTeX and biber log; run on Linux/macOS and on the submission edition
+- [ ] Approve `expectations.json`, `visual_baseline.json` and the two chapter 2 layout exceptions (U)
+- [ ] Review, commit and push (U)
+
 ## P6 Records
 - [x] `docs/incidents/` started: index + INC-001 (reversed TikZ labels, found by Daria) (B, 2026-11-18)
 - [ ] `docs/incidents/` (MA-4): remaining reports, one per genuine self-found bug (symptom, detection, root cause, fix location, prevention/Skill update, source line), e.g. the tlmgr hang, TikZ word order, `[heb]` + colour white text, matplotlib double bidi, LTR-flipped tag paragraph, commented-out `;`, black text in floats, the false PASS on an image-only check (B)
